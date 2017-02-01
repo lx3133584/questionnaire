@@ -15,7 +15,7 @@ export default {
   	}
   },
   mounted () { 	
-	if (window.localStorage.data){
+	if (window.localStorage.questionnaireData){
 		this.btn.link = "/list";
 		this.btn.text = "我的问卷";
 	}
