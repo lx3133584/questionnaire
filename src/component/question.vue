@@ -1,10 +1,10 @@
 <!-- 问题模块 -->
 <template>
   <div id="question">
-    <label><input type="checkbox">此题是否必填</label>
+    <label><input type="checkbox" v-model="required">此题是否必填</label>
     <h2>
       Q{{index+1}}（{{type_name}}）
-      <edit :text="title" sClass="qsTitle" iClass="qiTitle"></edit>
+      <edit :text="title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></edit>
     </h2>
     <ul>
       <li v-if="type==='text'">
@@ -12,14 +12,14 @@
       </li>
       <li v-else v-for="(item,index) in options">
         <i :class="icon+type"></i>
-        <edit :text="option_name+(index+1)"></edit>
+        <edit :text="options[index]" @transferData="pullDate" @transferIndex="pullIndex(index)"></edit>
         <i class="iconfont icon-close" @click="removeOption(index)"></i>
       </li>
     </ul>
     <p>
-      <span @click="upQuestion">上移</span>
-      <span>下移</span>
-      <span>复用</span>
+      <span v-if="index!=0" @click="upQuestion">上移</span>
+      <span v-if="index!=length" @click="downQuestion">下移</span>
+      <span @click="copyQuestion">复用</span>
       <span @click="removeQuestion">删除</span>
     </p>
     <button v-if="(type==='text')" id="station"></button>
@@ -33,15 +33,17 @@ import Edit from './edit.vue';
 export default {
   data () {
     return {
-      options: [],
+      required:false,
+      options: ['选项'],
       title:'请输入标题',
       type_name:'',
       icon:'iconfont icon-',
-      option_name:'选项'
+      tem_option:'临时选项'
     }
   },
   props: {
       index: Number,
+      length:Number,
       type: String,
   },
   created() {
@@ -58,17 +60,32 @@ export default {
       };
   },
   methods:{
-    addOption:function(){
-      this.options.push("")
+    pullTitle:function(data){//传递问题标题
+      this.title = data
     },
-    removeOption:function(index){
+    pullDate:function(data){//传递选项的值
+      this.tem_option = data
+    },
+    pullIndex:function(index){//把选项的值插入到数组
+      this.options.splice(index,1,this.option)
+    },
+    addOption:function(){//添加选项
+      this.options.push("选项")
+    },
+    removeOption:function(index){//删除选项
       this.options.splice(index,1)
     },
-    upQuestion:function(index){
-      this.$emit('up',index)
+    upQuestion:function(){//上移问题
+      this.$emit('up')
     },
-    removeQuestion:function(index){
-      this.$emit('del',index)
+    downQuestion:function(){//下移问题
+      this.$emit('down')
+    },
+    copyQuestion:function(){//复用问题
+      this.$emit('copy')
+    },
+    removeQuestion:function(){//删除问题
+      this.$emit('del')
     }
   },
   components: { Edit }

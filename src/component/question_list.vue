@@ -6,8 +6,11 @@
         <question 
           :type="item.type" 
           :index="index" 
-          @del="removeQuestion(index)"
+          :length="length"
           @up="upQuestion(index)"
+          @down="downQuestion(index)"
+          @copy="copyQuestion(index)"
+          @del="removeQuestion(index)"
         ></question>
       </li>
     </ul>
@@ -30,24 +33,42 @@ export default {
   data () {
     return {
       questions: [],
+      length: 0,
       add_seen:false
     }
   },
   methods:{
-    addQuestion:function(type){
+    addQuestion:function(type){//添加指定类型的问题
       this.questions.push({type:''+type+''}) ;
       this.add_seen = false;
     },
-    showAdd:function(){
+    showAdd:function(){//切换 增加的题目类型的 显示
       this.add_seen = !this.add_seen;
     },
-    upQuestion:function(index){
-      const cur = this.questions.splice(index,1);
-      const pre = this.questions.splice(index-1,1,cur);
+    upQuestion:function(index){//上移问题
+      var cur = this.questions[index];
+      var pre = this.questions[index-1];
+      this.questions.splice(index-1,1,cur);
       this.questions.splice(index,1,pre);
     },
-    removeQuestion:function(index){
-      this.questions.splice(index,1)
+    downQuestion:function(index){//下移问题
+      var cur = this.questions[index];
+      var aft = this.questions[index+1];
+      this.questions.splice(index+1,1,cur);
+      this.questions.splice(index,1,aft);
+    },
+    copyQuestion:function(index){//复用问题
+      var cur = this.questions[index];
+      this.questions.push(cur);
+    },
+    removeQuestion:function(index){//删除问题
+      this.questions.splice(index,1);
+    }
+  },
+  watch:{
+    questions:function(newValue,oldValue){
+      this.length = newValue.legnth;
+      vm.$forceUpdata();
     }
   },
   components: { Question }
@@ -91,7 +112,7 @@ export default {
   line-height: 3em;
   font-size: 2rem;
   color: #fff;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,152,0,0.6);
   border: none;
   cursor: pointer;
 }
