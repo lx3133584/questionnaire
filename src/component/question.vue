@@ -12,7 +12,7 @@
       </li>
       <li v-else v-for="(item,index) in options">
         <i :class="icon+type"></i>
-        <edit :text="options[index]" @transferData="pullDate" @transferIndex="pullIndex(index)"></edit>
+        <edit :text="options[index]" @transferData="pullData" @transferIndex="pullIndex(index)"></edit>
         <i class="iconfont icon-close" @click="removeOption(index)"></i>
       </li>
     </ul>
@@ -33,8 +33,7 @@ import Edit from './edit.vue';
 export default {
   data () {
     return {
-      required:false,
-      options: ['选项'],
+      //required:false,
       title:'请输入标题',
       type_name:'',
       icon:'iconfont icon-',
@@ -43,8 +42,6 @@ export default {
   },
   props: {
       index: Number,
-      length:Number,
-      type: String,
   },
   created() {
       switch (this.type){
@@ -59,33 +56,52 @@ export default {
           break;
       };
   },
+  computed: {
+    length () {
+      return this.$store.state.questionnaire.questions.length
+    },
+    type () {
+      return this.$store.state.questionnaire.questions[this.index].type
+    },
+    required () {
+      return this.$store.state.questionnaire.questions[this.index].required
+    },
+    options () {
+      return this.$store.state.questionnaire.questions[this.index].options
+    }
+  },
   methods:{
     pullTitle:function(data){//传递问题标题
-      this.title = data
+      this.$store.commit('modQuestionTitle',{index:this.index,title:data})
     },
-    pullDate:function(data){//传递选项的值
+    pullData:function(data){//传递选项的值
       this.tem_option = data
     },
     pullIndex:function(index){//把选项的值插入到数组
-      this.options.splice(index,1,this.option)
+      this.$store.commit('modOption',{index:this.index,oindex:index,option:this.tem_option})
     },
     addOption:function(){//添加选项
-      this.options.push("选项")
+      this.$store.commit('addOption',{index:this.index,option:"选项"})
     },
     removeOption:function(index){//删除选项
-      this.options.splice(index,1)
+      this.$store.commit('removeOption',{index:this.index,oindex:index})
     },
     upQuestion:function(){//上移问题
-      this.$emit('up')
+      this.$store.commit('upQuestion',{index:this.index})
     },
     downQuestion:function(){//下移问题
-      this.$emit('down')
+      this.$store.commit('downQuestion',{index:this.index})
     },
     copyQuestion:function(){//复用问题
-      this.$emit('copy')
+      this.$store.commit('copyQuestion',{index:this.index})
     },
     removeQuestion:function(){//删除问题
-      this.$emit('del')
+      this.$store.commit('removeQuestion',{index:this.index})
+    }
+  },
+  watch: {
+    required:function(newval,oldval){//修改问题是否必填
+      this.$store.commit('modQuestionRequired',{index:this.index,required:newval})
     }
   },
   components: { Edit }

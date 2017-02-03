@@ -3,15 +3,7 @@
   <div id="questionList">
     <ul>
       <li v-for="(item,index) in questions">
-        <question 
-          :type="item.type" 
-          :index="index" 
-          :length="length"
-          @up="upQuestion(index)"
-          @down="downQuestion(index)"
-          @copy="copyQuestion(index)"
-          @del="removeQuestion(index)"
-        ></question>
+        <question :index="index"></question>
       </li>
     </ul>
     <div>
@@ -32,43 +24,21 @@ import Question from './question.vue';
 export default {
   data () {
     return {
-      questions: [],
-      length: 0,
       add_seen:false
+    }
+  },
+  computed: {
+    questions () {
+      return this.$store.state.questionnaire.questions
     }
   },
   methods:{
     addQuestion:function(type){//添加指定类型的问题
-      this.questions.push({type:''+type+''}) ;
+      this.$store.commit('addQuestion',{type:type});
       this.add_seen = false;
     },
     showAdd:function(){//切换 增加的题目类型的 显示
       this.add_seen = !this.add_seen;
-    },
-    upQuestion:function(index){//上移问题
-      var cur = this.questions[index];
-      var pre = this.questions[index-1];
-      this.questions.splice(index-1,1,cur);
-      this.questions.splice(index,1,pre);
-    },
-    downQuestion:function(index){//下移问题
-      var cur = this.questions[index];
-      var aft = this.questions[index+1];
-      this.questions.splice(index+1,1,cur);
-      this.questions.splice(index,1,aft);
-    },
-    copyQuestion:function(index){//复用问题
-      var cur = this.questions[index];
-      this.questions.push(cur);
-    },
-    removeQuestion:function(index){//删除问题
-      this.questions.splice(index,1);
-    }
-  },
-  watch:{
-    questions:function(newValue,oldValue){
-      this.length = newValue.legnth;
-      vm.$forceUpdata();
     }
   },
   components: { Question }

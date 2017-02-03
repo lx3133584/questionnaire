@@ -4,12 +4,16 @@
     <div class="main">
       <question_list></question_list>
     </div>
+    <date></date>
+    <submit></submit>
   </div>
 </template>
 
 <script type="text/javascript">
 import Edit from './edit.vue';
 import Question_list from './question_list.vue';
+import Submit from './submit.vue';
+import Date from './date.vue';
 
 export default {
   data () {
@@ -17,7 +21,7 @@ export default {
       index: 1
     }
   },
-  components: { Question_list, Edit }
+  components: { Question_list, Edit, Submit, Date }
 }
 </script>
 

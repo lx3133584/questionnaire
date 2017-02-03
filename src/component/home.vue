@@ -53,6 +53,7 @@ export default {
 	background: #ff9800;
 	border: none;
 	transition: all 0.5s;
+	cursor: pointer;
 }
 #home a:hover{
 	color: #000;
