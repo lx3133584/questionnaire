@@ -14,8 +14,13 @@ export default {
       btn:{link:'/list',text:'问卷列表'}
   	}
   },
+  computed: {
+    length () {
+      return this.$store.state.list.length
+  	},
+  },
   mounted () { 	
-	if (window.localStorage.questionnaireData){
+	if (length>0){
 		this.btn.link = "/list";
 		this.btn.text = "我的问卷";
 	}

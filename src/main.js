@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-// 定义组件, 也可以像教程之前教的方法从别的文件引入
+// 定义组件
 import Home from './component/home.vue';
 import Navs from './component/navs.vue';
 import New from './component/new.vue';
@@ -24,7 +24,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     {
-      path: '/home',
+      path: '/',
       component: Home
     },
     {
@@ -46,10 +46,10 @@ const router = new VueRouter({
 // 分配多组件共享的数据和方法
 const store = new Vuex.Store({
   state: {
-    questionnaire: { title:'',   //问卷的标题
+    questionnaire: { title:'请输入标题',   //问卷的标题
                      questions:[{//问题
                         type:'radio',    //问题的类型
-                        title:'',   //问题的标题
+                        title:'请输入标题',   //问题的标题
                         required:false, //问题是否必填
                         options:['选项']   //选项
                       }],
@@ -63,7 +63,7 @@ const store = new Vuex.Store({
       state.questionnaire.title = arr.title
     },
     addQuestion (state,arr){//添加指定类型的问题
-      state.questionnaire.questions.push({type:arr.type,title:'', options:['选项']})
+      state.questionnaire.questions.push({type:arr.type,title:'请输入标题', required:false, options:['选项']})
     },
     modQuestionTitle (state,arr) {//修改问卷标题
       state.questionnaire.questions[arr.index].title = arr.title
@@ -102,7 +102,7 @@ const store = new Vuex.Store({
       state.questionnaire.questions[arr.index].options.splice(arr.oindex,1,arr.option)
     },
     modDate (state,arr){//修改截止日期
-      state.questionnaire.date = arr.date  
+      state.questionnaire.date = arr.date
     },
     save (state){//保存问卷
       state.questionnaire.status = "未发布";
@@ -117,9 +117,12 @@ const store = new Vuex.Store({
         state.questionnaire = state.list[arr.index]
       }
       else{
-        state.questionnaire = { title:'',questions:[{type:'radio',title:'',required:false,options:['选项']}],date:'',status:'未保存'}
+        state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项']}],date:'',status:'未保存'}
       }
-    }
+    },
+    removeNaire (state,arr) {//删除问卷
+      state.list.splice(arr.index,1)
+    },
      
   }
 })

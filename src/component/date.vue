@@ -138,7 +138,7 @@ function days(y,w){
                 this.$store.commit("modDate",{date:this.date})
             }
         },
-        ready:function(){
+        mounted:function(){
             this.$store.commit("modDate",{date:this.date})
         }
     }
@@ -203,6 +203,7 @@ function getToDay(){
     .date .panel{
         margin-top: 10px;
         position: absolute;
+        background: rgba(255,255,255,0.2);
     }
     .date .form-control{
         width: 200px;

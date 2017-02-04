@@ -1,7 +1,7 @@
 <!-- 问题模块 -->
 <template>
   <div id="question">
-    <label><input type="checkbox" v-model="required">此题是否必填</label>
+    <label><input type="checkbox" v-model="required" @click="modRequired">此题是否必填</label>
     <h2>
       Q{{index+1}}（{{type_name}}）
       <edit :text="title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></edit>
@@ -33,8 +33,6 @@ import Edit from './edit.vue';
 export default {
   data () {
     return {
-      //required:false,
-      title:'请输入标题',
       type_name:'',
       icon:'iconfont icon-',
       tem_option:'临时选项'
@@ -57,6 +55,9 @@ export default {
       };
   },
   computed: {
+    title () {
+      return this.$store.state.questionnaire.questions[this.index].title
+    },
     length () {
       return this.$store.state.questionnaire.questions.length
     },
@@ -97,11 +98,9 @@ export default {
     },
     removeQuestion:function(){//删除问题
       this.$store.commit('removeQuestion',{index:this.index})
-    }
-  },
-  watch: {
-    required:function(newval,oldval){//修改问题是否必填
-      this.$store.commit('modQuestionRequired',{index:this.index,required:newval})
+    },
+    modRequired:function(){//修改问题是否必填
+      this.$store.commit('modQuestionRequired',{index:this.index,required:!this.required})
     }
   },
   components: { Edit }

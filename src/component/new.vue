@@ -1,6 +1,6 @@
 <template>
   <div id="new">
-    <edit text="请输入标题" sClass="sTitle" iClass="iTitle"></edit>
+    <edit :text="title" sClass="sTitle" iClass="iTitle" @transferData="pullTitle"></edit>
     <div class="main">
       <question_list></question_list>
     </div>
@@ -20,6 +20,16 @@ export default {
     return {
       index: 1
     }
+  },
+  computed: {
+    title () {
+      return this.$store.state.questionnaire.title
+    },
+  },
+  methods:{
+    pullTitle:function(data){//传递问题标题
+      this.$store.commit('modNaireTitle',{title:data})
+    },
   },
   components: { Question_list, Edit, Submit, Date }
 }

@@ -18,7 +18,7 @@
   				<td>{{item.status}}</td>
   				<td>
 	  				<button @click="edit(index)" v-if="item.status=='未发布'">编辑</button>
-	  				<button>删除</button>
+	  				<button @click="del(index)">删除</button>
 	  				<button>查看问卷</button>
 	  				<button v-if="item.status=='已发布'">查看数据</button>
   				</td>
@@ -44,7 +44,10 @@ export default {
   	edit:function(index){
   		this.$store.commit('reset',{index:index});
   		this.$router.push('/new');
-  	}
+  	},
+    del:function(index){
+      this.$store.commit('removeNaire',{index:index});
+    }
   }
 }
 </script>
