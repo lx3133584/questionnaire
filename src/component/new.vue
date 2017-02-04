@@ -1,9 +1,10 @@
 <template>
-  <div id="new">
+  <div id="new" @click.self="hideDate">
     <edit :text="title" sClass="sTitle" iClass="iTitle" @transferData="pullTitle"></edit>
-    <div class="main">
+    <div class="main" @click="hideDate">
       <question_list></question_list>
     </div>
+    <p>截止日期：</p>
     <date></date>
     <submit :index="indexEditing"></submit>
   </div>
@@ -28,6 +29,11 @@ export default {
     pullTitle:function(data){//传递问题标题
       this.$store.commit('modNaireTitle',{title:data})
     },
+    hideDate:function(){
+      if(this.$store.state.seen){
+        this.$store.commit('switchSeen',{seen:false})
+      }
+    }
   },
   components: { Question_list, Edit, Submit, Date }
 }
@@ -53,5 +59,10 @@ export default {
 }
 #new .main{
   border-top: 2px solid #ddd;
+}
+#new>p{
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 30px;
 }
 </style>

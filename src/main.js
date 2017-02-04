@@ -61,7 +61,8 @@ const store = new Vuex.Store({
                       date:'',//截止日期
                       status:'未保存'//发布状态
                     },
-    list: []//个人问卷列表
+    list: [],//个人问卷列表
+    seen: false//判断是否显示日历模块
   },
   mutations: {
     modNaireTitle (state,arr) {//修改问卷标题
@@ -138,8 +139,12 @@ const store = new Vuex.Store({
     removeNaire (state,arr) {//删除问卷
       state.list.splice(arr.index,1)
     },
+    switchSeen (state,arr) {
+      state.seen = arr.seen
+    }
      
-  }
+  
+}
 })
 
 // 现在我们可以启动应用了！

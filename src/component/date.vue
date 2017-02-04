@@ -51,6 +51,11 @@ function days(y,w){
                 at:[]
             }
         },
+        computed:{
+            seen(){
+                return this.$store.state.seen
+            }
+        },
         methods:{
             add: function(d){
                 if(d == "y"){
@@ -122,6 +127,7 @@ function days(y,w){
                     }            
                 }
                 this.btn = true;
+                this.$store.commit("switchSeen",{seen:true});
             },
             myday:function(day){
                 let now = new Date();
@@ -136,12 +142,17 @@ function days(y,w){
                 }
                 this.btn = false;
                 this.$store.commit("modDate",{date:this.date})
-            }
+            },
         },
         mounted:function(){
-            this.$store.commit("modDate",{date:this.date})
+            this.$store.commit("modDate",{date:this.date});
+        },
+    watch:{
+        seen:function(newValue,oldValue){
+            this.btn = newValue;        
         }
     }
+}
 function getToDay(){
     var now = new Date();
     var nowYear = now.getFullYear();
@@ -151,64 +162,65 @@ function getToDay(){
 }
 </script>
 <style>
-    .date {
-        margin: 20px;
-        display: inline-block;
-    }
-    .date .table ul {
-        padding: 0;
-        margin: 0;
-    }
-    .date .table ul li {      
-        width: 30px;
-        height: 30px;
-        margin: 7px;
-        line-height: 30px;
-        transition: 0.3s;
-        text-align: center; 
-        cursor: pointer;
-        margin-top: 7px;
-        font-size: 20px;
-        display: inline-block;
-        list-style-type: none;
-    }
-    .date .e {
-        padding: 0;
-        margin: 0;
-    }
-    .date .e li {      
-        width: 30px;
-        height: 30px;
-        margin: 7px;
-        line-height: 40px;
-        transition: 0.3s;
-        text-align: center; border-radius: 40px;
-        text-align: center;
-        cursor: pointer;
-        margin-top: 7px;
-        font-size: 20px;
-        display: inline-block;
-        list-style-type: none;
-    }
-    .date .def{
-        color: #ccc;
-    }
-    .date .table li.center{
-        border-radius: 20px;
-    }
-    .date .table li.center:hover{
-        background: #337AB7;
-        color: #fff;
-    }
-    .date .panel{
-        margin-top: 10px;
-        position: absolute;
-        background: rgba(255,255,255,0.2);
-    }
-    .date .form-control{
-        width: 200px;
-    }
-    .date .form-control{
-        background: #fff;
-    }
+.date {
+    margin: 10px 30px 40px 30px;
+    display: inline-block;
+}
+.date .table ul {
+    padding: 0;
+    margin: 0;
+}
+.date .table ul li {      
+    width: 30px;
+    height: 30px;
+    margin: 7px;
+    line-height: 30px;
+    transition: 0.3s;
+    text-align: center; 
+    cursor: pointer;
+    margin-top: 7px;
+    font-size: 20px;
+    display: inline-block;
+    list-style-type: none;
+}
+.date .e {
+    padding: 0;
+    margin: 0;
+}
+.date .e li {      
+    width: 30px;
+    height: 30px;
+    margin: 7px;
+    line-height: 40px;
+    transition: 0.3s;
+    text-align: center; border-radius: 40px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 7px;
+    font-size: 20px;
+    display: inline-block;
+    list-style-type: none;
+}
+.date .def{
+    color: #ccc;
+}
+.date .table li.center{
+    border-radius: 20px;
+}
+.date .table li.center:hover{
+    background: #337AB7;
+    color: #fff;
+}
+.date .panel{
+    margin-top: 10px;
+    position: absolute;
+    background: rgba(255,255,255,0.2);
+}
+.date .form-control{
+    text-align: center;
+    width: 60%;
+    font-size: 16px;
+    color: #fff;
+    background: rgba(255,255,255,0.4);
+}
 </style>
