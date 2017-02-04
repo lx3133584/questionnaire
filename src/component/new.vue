@@ -5,7 +5,7 @@
       <question_list></question_list>
     </div>
     <date></date>
-    <submit></submit>
+    <submit :index="indexEditing"></submit>
   </div>
 </template>
 
@@ -16,15 +16,13 @@ import Submit from './submit.vue';
 import Date from './date.vue';
 
 export default {
-  data () {
-    return {
-      index: 1
-    }
-  },
   computed: {
     title () {
       return this.$store.state.questionnaire.title
     },
+    indexEditing () {
+      return this.$route.query.index
+    }
   },
   methods:{
     pullTitle:function(data){//传递问题标题

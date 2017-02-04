@@ -43,7 +43,7 @@ export default {
   methods:{
   	edit:function(index){
   		this.$store.commit('reset',{index:index});
-  		this.$router.push('/new');
+  		this.$router.push({ path: 'new', query: { index: index }});
   	},
     del:function(index){
       this.$store.commit('removeNaire',{index:index});

@@ -1,7 +1,7 @@
 <template>
   <div id="submit">
-    <button @click="submit">提交问卷</button>
-    <button @click="save">保存问卷</button>  
+    <button @click="submit(index)">提交问卷</button>
+    <button @click="save(index)">保存问卷</button>  
   </div>
 </template>
 
@@ -9,14 +9,25 @@
 
 
 export default {
+  props:{index:Number},
   methods:{
-    save:function(){
-      this.$store.commit('save');
+    save:function(index){
+      if(index!=undefined){
+        this.$store.commit('save',{index:index});
+      }
+      else{
+        this.$store.commit('save');
+      }
       this.$store.commit('reset');
       this.$router.push('/list');
     },
-    submit:function(){
-      this.$store.commit('submit');
+    submit:function(index){
+      if(index!=undefined){
+        this.$store.commit('submit',{index:index});
+      }
+      else{
+        this.$store.commit('submit');
+      }
       this.$store.commit('reset');
       this.$router.push('/list');
     }

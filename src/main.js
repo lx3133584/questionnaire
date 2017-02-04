@@ -109,13 +109,23 @@ const store = new Vuex.Store({
     modDate (state,arr){//修改截止日期
       state.questionnaire.date = arr.date
     },
-    save (state){//保存问卷
+    save (state,arr){//保存问卷
       state.questionnaire.status = "未发布";
-      state.list.push(state.questionnaire)
+      if(arr){
+        state.list[arr.index] = state.questionnaire
+      }
+      else{
+        state.list.push(state.questionnaire)
+      }
     },
-    submit (state){//保存并把问卷状态改为发布
+    submit (state,arr){//保存并把问卷状态改为发布
       state.questionnaire.status = "已发布";
-      state.list.push(state.questionnaire);
+      if(arr){
+        state.list[arr.index] = state.questionnaire
+      }
+      else{
+        state.list.push(state.questionnaire)
+      }
     },
     reset (state,arr){//重置正在编辑的问卷
       if(arr){

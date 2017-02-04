@@ -41,10 +41,10 @@
               <textarea></textarea>
             </li>
           </ul>
-        </template>
-        
+        </template> 
       </li>
     </ul>
+    <button @click="back">返回</button>
   </div>
 </template>
 
@@ -58,6 +58,11 @@ export default {
     index () {
       return this.$route.query.index
     }
+  },
+  methods:{
+    back:function(){
+      this.$router.push('/list');
+    },
   }
 }
 </script>
@@ -104,5 +109,25 @@ export default {
   font-size: 2rem;
   color: #fff;
   background: rgba(255,255,255,0.4);
+}
+#view button{
+  float: right;
+  display: inline-block;
+  margin: 1em;
+  width: 5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  background: rgba(255,152,0,0.8);
+  border: none;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+#view button:hover{
+  color: #000;
+  background: #fff;
+  border: #000 1px solid;
 }
 </style>
