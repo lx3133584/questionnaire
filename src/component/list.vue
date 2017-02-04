@@ -19,7 +19,7 @@
   				<td>
 	  				<button @click="edit(index)" v-if="item.status=='未发布'">编辑</button>
 	  				<button @click="del(index)">删除</button>
-	  				<button>查看问卷</button>
+	  				<button @click="view(index)">查看问卷</button>
 	  				<button v-if="item.status=='已发布'">查看数据</button>
   				</td>
   			</tr>
@@ -47,6 +47,9 @@ export default {
   	},
     del:function(index){
       this.$store.commit('removeNaire',{index:index});
+    },
+    view:function(index){
+      this.$router.push({ path: 'view', query: { index: index }})
     }
   }
 }
