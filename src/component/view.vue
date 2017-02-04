@@ -20,7 +20,7 @@
         <!-- 多选题 -->
         <template v-if="item.type=='checkbox'">
           <h2>Q{{index+1}} ( 多选题 ) {{item.title}}
-            <span v-if="item.required">(必填)</span>
+            <span v-if="item.required" style="color:#EB3F3F">*</span>
           </h2>
           <ul>
             <li v-for="itemIn in item.options">
@@ -34,7 +34,7 @@
         <!-- 文本题 -->
         <template v-if="item.type=='text'">
           <h2>Q{{index+1}} ( 文本题 ) {{item.title}}
-            <span v-if="item.required">(必填)</span>
+            <span v-if="item.required" style="color:#EB3F3F">*</span>
           </h2>
           <ul>
             <li>

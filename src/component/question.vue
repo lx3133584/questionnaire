@@ -18,7 +18,7 @@
     </ul>
     <p>
       <span v-if="index!=0" @click="upQuestion">上移</span>
-      <span v-if="index!=length" @click="downQuestion">下移</span>
+      <span v-if="index!=length-1" @click="downQuestion">下移</span>
       <span @click="copyQuestion">复用</span>
       <span @click="removeQuestion">删除</span>
     </p>
@@ -33,26 +33,13 @@ import Edit from './edit.vue';
 export default {
   data () {
     return {
-      type_name:'',
+      
       icon:'iconfont icon-',
       tem_option:'临时选项'
     }
   },
   props: {
       index: Number,
-  },
-  created() {
-      switch (this.type){
-        case "radio":
-          this.type_name="单选题";
-          break;
-        case "checkbox":
-          this.type_name="多选题";
-          break;
-        case "text":
-          this.type_name="文本题";
-          break;
-      };
   },
   computed: {
     title () {
@@ -63,6 +50,19 @@ export default {
     },
     type () {
       return this.$store.state.questionnaire.questions[this.index].type
+    },
+    type_name () {
+      switch (this.type){
+        case "radio":
+          return "单选题";
+          break;
+        case "checkbox":
+          return "多选题";
+          break;
+        case "text":
+          return "文本题";
+          break;
+      };
     },
     required () {
       return this.$store.state.questionnaire.questions[this.index].required

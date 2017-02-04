@@ -42,8 +42,12 @@ export default {
           this.$emit('transferIndex','')            //提供给父组件一个容器，用来传递选项的位置
         }
       })
-    },
-    
+    }, 
+  },
+  watch:{
+    text:function(newValue,oldValue){
+      this.edit_text = newValue
+    }
   }
 }
 </script>
