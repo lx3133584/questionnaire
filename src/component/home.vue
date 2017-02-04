@@ -20,7 +20,7 @@ export default {
   	},
   },
   mounted () { 	
-	if (length>0){
+	if (this.length>0){
 		this.btn.link = "/list";
 		this.btn.text = "我的问卷";
 	}

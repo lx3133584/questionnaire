@@ -24,7 +24,7 @@ html,body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 62.5%;
   height: 90%;
-  background: url('assets/images/bg.jpg') no-repeat;
+  background: url('./assets/images/bg.jpg') no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
   background-attachment: fixed;

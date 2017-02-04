@@ -25,7 +25,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     {
-      path: '/',
+      path: '/que',
       component: Home
     },
     {
@@ -61,7 +61,26 @@ const store = new Vuex.Store({
                       date:'',//截止日期
                       status:'未保存'//发布状态
                     },
-    list: [],//个人问卷列表
+    list: [{ title:'JavaScript框架使用使用情况调查',
+                     questions:[{
+                        type:'checkbox',
+                        title:'你最常使用的框架或库是什么？',
+                        required:false,
+                        options:['react','vue','jquery','bootstrap','angularjs']
+                      },{
+                        type:'radio',
+                        title:'你觉得那个框架的学习难度最大？',
+                        required:false,
+                        options:['react','vue','jquery','bootstrap','angularjs']
+                      },{
+                        type:'text',
+                        title:'说出你喜欢的框架或者库的优点。',
+                        required:false,
+                        options:[]
+                      }],
+                      date:'2018-01-01',
+                      status:'未发布'
+                    }],
     seen: false//判断是否显示日历模块
   },
   mutations: {
@@ -93,10 +112,10 @@ const store = new Vuex.Store({
     },
     copyQuestion (state,arr){//复用问题
       var cur = state.questionnaire.questions[arr.index];
-      state.questionnaire.questions.push(cur);    
+      state.questionnaire.questions.push(cur);
     },
     removeQuestion (state,arr){//删除问题
-      state.questionnaire.questions.splice(arr.index,1);   
+      state.questionnaire.questions.splice(arr.index,1);
     },
     addOption (state,arr){//添加选项
       state.questionnaire.questions[arr.index].options.push(arr.option)

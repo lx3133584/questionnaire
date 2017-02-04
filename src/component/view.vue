@@ -6,7 +6,7 @@
         <!-- 单选题 -->
         <template v-if="item.type=='radio'">
           <h2>Q{{index+1}} ( 单选题 ) {{item.title}}
-            <span v-if="item.required">(必填)</span>
+            <span v-if="item.required" style="color:#EB3F3F">*</span>
           </h2>
           <ul>
             <li v-for="itemIn in item.options">
