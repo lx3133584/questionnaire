@@ -79,5 +79,10 @@ export default {
 #list table tbody{
 	font-size: 2rem
 }
-
+#list table tbody button{
+  color: #fff;
+  background: rgba(255,152,0,0.8);
+  border: none;
+  border-radius: 3px;
+}
 </style>
