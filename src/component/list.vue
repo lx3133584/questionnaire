@@ -12,7 +12,7 @@
   		</thead>
   		<tbody>
   			<tr v-for="(item,index) in list">
-  				<td><input type="checkbox"></td>
+  				<!-- <td><input type="checkbox"></td> -->
   				<td>{{item.title}}</td>
   				<td>{{item.date}}</td>
   				<td>{{item.status}}</td>
