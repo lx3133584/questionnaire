@@ -60,14 +60,15 @@ export default {
 	margin: 120px auto 0 auto;
 	padding: 100px 0;
 	width: 95%;
-  	color: #eee;
-  	text-align: center;
+	color: #eee;
+	text-align: center;
 	background: rgba(255,255,255,0.2);
 }
 #list table{
 	margin: 0 auto;
 }
 #list table th,#list table td{
+  color: #fff;
 	padding: 5px 10px;
 }
 #list table input{
