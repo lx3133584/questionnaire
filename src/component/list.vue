@@ -3,7 +3,7 @@
   	<table border="4">
   		<thead>
   			<tr>
-  				<th><input type="checkbox"></th>
+  				<!-- <th><input type="checkbox"></th> -->
   				<th>标题</th>
   				<th>截止日期</th>
   				<th>状态</th>
