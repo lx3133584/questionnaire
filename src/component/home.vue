@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-	<p>{{hello}}<br>{{msg}}</p>
+	<p>{{hello}}，{{name}}<br>{{msg}}</p>
 	<router-link :to='btn.link'>{{btn.text}}</router-link>
   </div>
 </template>
@@ -9,15 +9,18 @@
 export default {
   data () {
     return {
-      hello: "你好，",
+      hello: "你好",
       msg:"欢迎来到调差问卷！",
       btn:{link:'/list',text:'问卷列表'}
   	}
   },
   computed: {
     length () {
-      return this.$store.state.list.length
+    	return this.$store.state.list.length
   	},
+  	name () {
+  		return this.$store.state.name;
+  	}
   },
   mounted () { 	
 	if (this.length>0){
@@ -28,6 +31,7 @@ export default {
 		this.btn.link = "/new";
 		this.btn.text = "新建问卷";
 	}
+	this.$store.commit('getName');
   }
 }
 </script>

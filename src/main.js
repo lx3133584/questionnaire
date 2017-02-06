@@ -61,29 +61,19 @@ const store = new Vuex.Store({
                       date:'',//截止日期
                       status:'未保存'//发布状态
                     },
-    list: [{ title:'JavaScript框架使用使用情况调查',
-                     questions:[{
-                        type:'checkbox',
-                        title:'你最常使用的框架或库是什么？',
-                        required:false,
-                        options:['react','vue','jquery','bootstrap','angularjs']
-                      },{
-                        type:'radio',
-                        title:'你觉得那个框架的学习难度最大？',
-                        required:false,
-                        options:['react','vue','jquery','bootstrap','angularjs']
-                      },{
-                        type:'text',
-                        title:'说出你喜欢的框架或者库的优点。',
-                        required:false,
-                        options:[]
-                      }],
-                      date:'2018-01-01',
-                      status:'未发布'
-                    }],
-    seen: false//判断是否显示日历模块
+    list: [],
+    seen: false,//判断是否显示日历模块
+    name: ""//存放登录用户的用户名
   },
   mutations: {
+    getName (state) {//得到用户的用户名
+       Vue.http.options.root = '/que';
+       Vue.http.get('data.php').then(response => {
+         state.name = response.body;
+       }, response => {
+         alert("error"+response.headers)
+       });
+    },
     modNaireTitle (state,arr) {//修改问卷标题
       state.questionnaire.title = arr.title
     },
@@ -132,24 +122,50 @@ const store = new Vuex.Store({
     save (state,arr){//保存问卷
       state.questionnaire.status = "未发布";
       if(arr){
-        state.list[arr.index] = state.questionnaire
+        Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
+        .then(response => {
+          console.log('success')
+        }, response => {
+          alert("error"+response.headers)
+        });
       }
       else{
-        state.list.push(state.questionnaire)
+        Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
+        .then(response => {
+          console.log('success')
+        }, response => {
+          alert("error"+response.headers)
+        });
       }
     },
     submit (state,arr){//保存并把问卷状态改为发布
       state.questionnaire.status = "已发布";
       if(arr){
-        state.list[arr.index] = state.questionnaire
+        Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
+        .then(response => {
+          console.log('success')
+        }, response => {
+          alert("error"+response.headers)
+        });
       }
       else{
-        state.list.push(state.questionnaire)
+        Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
+        .then(response => {
+          console.log('success')
+        }, response => {
+          alert("error"+response.headers)
+        });
       }
     },
     reset (state,arr){//重置正在编辑的问卷
       if(arr){
-        state.questionnaire = state.list[arr.index]
+        Vue.http.post('data.php',{"type":"get","index":arr.index})
+        .then(response => {
+          state.questionnaire = response.body.data;
+          console.log('success');
+        }, response => {
+          alert("error"+response.headers)
+        });
       }
       else{
         state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项']}],date:'',status:'未保存'}
@@ -157,6 +173,29 @@ const store = new Vuex.Store({
     },
     removeNaire (state,arr) {//删除问卷
       state.list.splice(arr.index,1)
+      Vue.http.post('data.php',{"type":"del","index":arr.index})
+        .then(response => {
+          console.log('success');
+        }, response => {
+          alert("error"+response.headers)
+        });
+    },
+    getList (state) {//得到问卷列表
+      Vue.http.post('data.php',{"type":"list"})
+        .then(response => {
+          if(response.body!=0){
+            console.log(response.body)
+            state.list = response.body.split('++');
+            for(var i=0;i<state.list.length;i++){
+            state.list[i] = JSON.parse(state.list[i]);
+            }
+          }else{
+            state.list = []
+          }
+          
+        }, response => {
+          alert("error"+response.headers)
+        });
     },
     switchSeen (state,arr) {
       state.seen = arr.seen

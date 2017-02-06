@@ -30,15 +30,13 @@
 
 <script type="text/javascript">
 export default {
-  data () {
-    return {
-      msg: "hello world"
-    }
-  },
   computed: {
     list () {
     	return this.$store.state.list
     }
+  },
+  mounted:function(){
+    this.$store.commit('getList');
   },
   methods:{
   	edit:function(index){

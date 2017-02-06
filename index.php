@@ -12,9 +12,6 @@ if (!(isset($_SESSION["admin"]) && $_SESSION["admin"] === true)) {
   header("Location: http://www.myliangxu.cn/login"); 
   //确保重定向后，后续代码不会被执行 
   exit;
-} 
-else {
-  echo $_SESSION['account'];
 }
 ?> 
 <!DOCTYPE html>
