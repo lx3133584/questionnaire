@@ -161,7 +161,7 @@ const store = new Vuex.Store({
       if(arr){
         Vue.http.post('data.php',{"type":"get","index":arr.index})
         .then(response => {
-          state.questionnaire = response.body.data;
+          state.questionnaire = JSON.parse(response.body);
           console.log('success');
         }, response => {
           alert("error"+response.headers)
@@ -184,7 +184,6 @@ const store = new Vuex.Store({
       Vue.http.post('data.php',{"type":"list"})
         .then(response => {
           if(response.body!=0){
-            console.log(response.body)
             state.list = response.body.split('++');
             for(var i=0;i<state.list.length;i++){
             state.list[i] = JSON.parse(state.list[i]);

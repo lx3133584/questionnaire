@@ -54,6 +54,7 @@ function addData(){
 	global $post;
 	$data = $post->data;
 	$data = json_encode($data);
+	$data = decodeUnicode($data);
 
 	mysql_query("SET NAMES utf8");
 
@@ -81,6 +82,7 @@ function modData(){
 	global $post;
 	$data = $post->data;
 	$data = json_encode($data);
+	$data = decodeUnicode($data);
 	$index = $post->index;
 
 	mysql_query("SET NAMES utf8");
@@ -108,6 +110,7 @@ function delData(){
 	global $post;
 	$data = $post->data;
 	$data = json_encode($data);
+	$data = decodeUnicode($data);
 	$index = $post->index;
 
 	mysql_query("SET NAMES utf8");
@@ -142,7 +145,7 @@ function getData(){
 	$row = mysql_fetch_array($query1);
 	$rows = explode('++',$row[0]);
 	if ($query1 == TRUE) {
-	    echo '{"success":true,"message":"取出成功","data":"'.$rows[$index].'"}';
+	    echo $rows[$index];
 	} 
 	else {
 	    echo '{"success":false,"message":"Error: " . $sql . "<br>" . $conn->error}';
@@ -169,6 +172,16 @@ function getList(){
 
 }
 
+//unicode码解码
+function decodeUnicode($str)
+{
+    return preg_replace_callback('/\\\\u([0-9a-f]{4})/i',
+        create_function(
+            '$matches',
+            'return mb_convert_encoding(pack("H*", $matches[1]), "UTF-8", "UCS-2BE");'
+        ),
+        $str);
+}
 
 
 ?>
