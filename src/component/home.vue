@@ -22,7 +22,8 @@ export default {
   		return this.$store.state.name;
   	}
   },
-  mounted () { 	
+  mounted () { 
+	this.$store.commit('getList');	
 	if (this.length>0){
 		this.btn.link = "/list";
 		this.btn.text = "我的问卷";
