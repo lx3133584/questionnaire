@@ -187,7 +187,7 @@ const store = new Vuex.Store({
             state.list = response.body.split('++');
             for(var i=0;i<state.list.length;i++){
             state.list[i] = JSON.parse(state.list[i]);
-            }
+          }
           }else{
             state.list = []
           }

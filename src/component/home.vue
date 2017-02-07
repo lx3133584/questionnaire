@@ -16,13 +16,13 @@ export default {
   },
   computed: {
     length () {
-    	return this.$store.state.list.length
+    	return this.$store.state.list.length;
   	},
   	name () {
   		return this.$store.state.name;
   	}
   },
-  mounted () { 
+  mounted () {
 	this.$store.commit('getList');	
 	if (this.length>0){
 		this.btn.link = "/list";
