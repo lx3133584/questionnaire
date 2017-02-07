@@ -130,4 +130,5 @@ export default {
   background: #fff;
   border: #000 1px solid;
 }
+
 </style>
