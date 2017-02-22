@@ -13,9 +13,9 @@ export default {
   data () {
     return {
       nav_list:[//导航栏列表中的项
-      	{link:'/que',title:'问卷调查'},
-      	{link:'/list',title:'问卷列表'},
-      	{link:'/new',title:'新建问卷'}
+      	{link:'.',title:'问卷调查'},
+      	{link:'./list',title:'问卷列表'},
+      	{link:'./new',title:'新建问卷'}
       ]
     }
   }

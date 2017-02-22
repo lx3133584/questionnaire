@@ -19,7 +19,7 @@ export default {
         this.$store.commit('save');
       }
       this.$store.commit('reset');
-      this.$router.push('/list');
+      this.$router.push('./list');
     },
     submit:function(index){
       if(index!=undefined){
@@ -29,7 +29,7 @@ export default {
         this.$store.commit('submit');
       }
       this.$store.commit('reset');
-      this.$router.push('/list');
+      this.$router.push('./list');
     }
   }
 }
