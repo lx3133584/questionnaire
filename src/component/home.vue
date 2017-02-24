@@ -11,7 +11,7 @@ export default {
     return {
       hello: "你好",
       msg:"欢迎来到调差问卷！",
-      btn:{link:'./list',text:'问卷列表'}
+      btn:{link:'/que/list',text:'问卷列表'}
   	}
   },
   computed: {
@@ -25,11 +25,11 @@ export default {
   mounted () {
 	this.$store.commit('getList');	
 	if (this.length>0){
-		this.btn.link = "./list";
+		this.btn.link = "/que/list";
 		this.btn.text = "我的问卷";
 	}
 	else {
-		this.btn.link = "./new";
+		this.btn.link = "/que/new";
 		this.btn.text = "新建问卷";
 	}
 	this.$store.commit('getName');

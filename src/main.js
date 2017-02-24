@@ -25,23 +25,23 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     {
-      path: '.',
+      path: '/que',
       component: Home
     },
     {
-      path: './navs',
+      path: '/que/navs',
       component: Navs
     },
     {
-      path: './new',
+      path: '/que/new',
       component: New
     },
     {
-      path: './list',
+      path: '/que/list',
       component: List
     },
     {
-      path: './view',
+      path: '/que/view',
       component: View
     }
   ]
@@ -182,17 +182,17 @@ const store = new Vuex.Store({
     },
     getList (state) {//得到问卷列表
       Vue.http.post('data.php',{"type":"list"})
-        .then(response => {
+        .then((response) => {
           if(response.body!=0){
             state.list = response.body.split('++');
             for(var i=0;i<state.list.length;i++){
             state.list[i] = JSON.parse(state.list[i]);
-          }
+            }
           }else{
             state.list = []
           }
           
-        }, response => {
+        }, (response) => {
           alert("error"+response.headers)
         });
     },
