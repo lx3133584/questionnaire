@@ -124,7 +124,7 @@ const store = new Vuex.Store({
       if(arr){
         Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
         .then(response => {
-          console.log('success')
+          console.log('成功保存并把问卷状态改为未发布')
         }, response => {
           alert("error"+response.headers)
         });
@@ -132,7 +132,7 @@ const store = new Vuex.Store({
       else{
         Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
         .then(response => {
-          console.log('success')
+          console.log('成功保存并把问卷状态改为未发布')
         }, response => {
           alert("error"+response.headers)
         });
@@ -143,7 +143,7 @@ const store = new Vuex.Store({
       if(arr){
         Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
         .then(response => {
-          console.log('success')
+          console.log('成功保存并把问卷状态改为已发布')
         }, response => {
           alert("error"+response.headers)
         });
@@ -151,7 +151,7 @@ const store = new Vuex.Store({
       else{
         Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
         .then(response => {
-          console.log('success')
+          console.log('成功保存并把问卷状态改为已发布')
         }, response => {
           alert("error"+response.headers)
         });
@@ -162,7 +162,7 @@ const store = new Vuex.Store({
         Vue.http.post('data.php',{"type":"get","index":arr.index})
         .then(response => {
           state.questionnaire = JSON.parse(response.body);
-          console.log('success');
+          console.log('成功重置正在编辑的问卷');
         }, response => {
           alert("error"+response.headers)
         });
@@ -175,24 +175,30 @@ const store = new Vuex.Store({
       state.list.splice(arr.index,1)
       Vue.http.post('data.php',{"type":"del","index":arr.index})
         .then(response => {
-          console.log('success');
+          console.log('成功删除问卷');
         }, response => {
           alert("error"+response.headers)
         });
     },
     getList (state) {//得到问卷列表
       Vue.http.post('data.php',{"type":"list"})
-        .then((response) => {
+        .then(response => {
           if(response.body!=0){
-            state.list = response.body.split('++');
-            for(var i=0;i<state.list.length;i++){
-            state.list[i] = JSON.parse(state.list[i]);
+            if(response.body.indexOf("++") !== -1){
+              state.list = response.body.split('++');
             }
-          }else{
+            else{
+              state.list[0] = response.body;
+            }
+            for(var i=0;i<state.list.length;i++){
+                state.list[i] = JSON.parse(state.list[i]);
+              }
+          }
+          else{
             state.list = []
           }
           
-        }, (response) => {
+        }, response => {
           alert("error"+response.headers)
         });
     },
