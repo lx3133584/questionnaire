@@ -1,6 +1,6 @@
 # questionnaire
 
-> A Vue.js project
+> Based on vue.js2.0 questionnaire survey site
 
 ## Build Setup
 
@@ -15,4 +15,7 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Test account
+>username: admin
+
+>password: admin
