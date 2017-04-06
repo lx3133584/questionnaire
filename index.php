@@ -5,12 +5,11 @@ $admin = false;
 session_start();
 // 判断是否登陆
 if (!(isset($_SESSION["admin"]) && $_SESSION["admin"] === true)) {
-  echo "<script>alert('未登陆，跳转到登陆页面')</script>";
   // 验证失败，将 $_SESSION["admin"] 置为 false
   $_SESSION["admin"] = false;
-  //die("您无权访问");
-  //重定向浏览器 
-  header("Location: ./login"); 
+  //弹出提示框，重定向浏览器 
+  echo "<script>alert('未登陆，跳转到登陆页面');location.href = './login';</script>";
+  // header("Location: ./login"); 
   //确保重定向后，后续代码不会被执行 
   exit;
 }

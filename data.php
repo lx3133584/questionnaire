@@ -156,7 +156,6 @@ function getList(){
 	session_start();
 	$name = $_SESSION["account"];
 	global $post;
-	$index = $post->index;
 
 	mysql_query("SET NAMES utf8");
 
