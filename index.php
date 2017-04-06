@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html;charset=utf-8"); 
 // 防止全局变量造成安全隐患
 $admin = false;
 // 启动会话，这步必不可少
