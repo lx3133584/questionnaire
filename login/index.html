@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>登录页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="main">
+    <div>
+        <h2 class="active">登录</h2>
+        <h2>注册</h2>
+    </div>
+
+    <div class="login">
+        <form action="login.php" method="post">
+            <input type="text" name="account" placeholder="用户名">
+            <p></p>
+            <input type="password" name="password" placeholder="密码">
+            <input type="submit" value="登录">
+        </form>
+    </div>
+
+    <div class="register">
+        <form action="register.php" method="post">
+            <input type="text" name="account" placeholder="用户名">
+            <p></p>
+            <input type="password" name="password" placeholder="密码">
+            <p></p>
+            <input type="password" name="password2" placeholder="确认密码">
+            <p></p>
+            <input type="text" name="name" placeholder="昵称">
+            <div>
+                <label><input type="radio" name="sex" value="1">男</label>
+                <label><input type="radio" name="sex" value="2">女</label>
+            </div>
+            <input type="submit" value="注册">
+            <i>*</i><i>*</i><i>*</i>
+        </form>
+    </div>
+
+    <div class="success">
+        <p>注册成功</p>
+        <input type="button" value="返回">
+    </div>
+
+</div>
+<script src="//apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
