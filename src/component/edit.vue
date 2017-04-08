@@ -6,7 +6,7 @@
     </div>
     <p>截止日期：</p>
     <date></date>
-    <submit></submit>
+    <submit :index="indexEditing"></submit>
   </div>
 </template>
 
@@ -19,12 +19,16 @@ import Date from './date.vue';
 export default {
   computed: {
     title () {
-      return this.$store.state.questionnaire.title
+        return this.$store.state.questionnaire.title
+    },
+    indexEditing () {
+        return this.$store.state.editing.index
     }
   },
   mounted:function(){
-    this.$store.commit('reset');
-    this.$store.commit('switchEditing',{boolean:false});
+      if(!this.$store.state.editing.boolean&&this.$route.query.index!=undefined){
+        this.$store.commit('switchEditing',{boolean:true,index:this.$route.query.index});
+      }
   },
   methods:{
     pullTitle:function(data){//传递问题标题

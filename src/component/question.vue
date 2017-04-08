@@ -33,7 +33,6 @@ import Text_edit from './text_edit.vue';
 export default {
   data () {
     return {
-      
       icon:'iconfont icon-',
       tem_option:'临时选项'
     }

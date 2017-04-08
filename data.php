@@ -108,9 +108,6 @@ function delData(){
 	session_start();
 	$name = $_SESSION["account"];
 	global $post;
-	$data = $post->data;
-	$data = json_encode($data);
-	$data = decodeUnicode($data);
 	$index = $post->index;
 
 	mysql_query("SET NAMES utf8");

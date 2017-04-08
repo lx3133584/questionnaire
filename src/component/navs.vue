@@ -4,6 +4,9 @@
     	<li v-for='item in nav_list'>
     		<router-link :to='item.link'>{{item.title}}</router-link>
     	</li>
+			<li>
+				<router-link to='/que/edit' v-if='nav_edit'>编辑问卷</router-link>
+			</li>
     </ul>
   </div>
 </template>
@@ -17,6 +20,11 @@ export default {
       	{link:'/que/list',title:'问卷列表'},
       	{link:'/que/new',title:'新建问卷'}
       ]
+    }
+  },
+	computed: {
+    nav_edit () {
+      return this.$store.state.editing.boolean
     }
   }
 }

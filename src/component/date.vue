@@ -40,10 +40,9 @@ function days(y,w){
     return x;
 }
     export default{
-        data(){
-            return{
+        data () {
+            return {
                 btn: false,
-                date:getToDay(),
                 day: Number,
                 week: new Date().getMonth() + 1,
                 year: new Date().getFullYear(),
@@ -55,6 +54,9 @@ function days(y,w){
         computed:{
             seen(){
                 return this.$store.state.seen
+            },
+            date(){
+                return this.$store.state.questionnaire.date
             }
         },
         methods:{
@@ -133,26 +135,20 @@ function days(y,w){
             myday:function(day){
                 let now = new Date();
                 this.day = day;
-                if(this.day>=now.getDate() 
-                    && this.year>=now.getFullYear() 
-                    && this.week>=now.getMonth()+1){
-                    this.date= this.year +"-"+ this.week+ "-" + this.day;
+                if(this.year*10000+this.week*100+this.day>=now.getFullYear()*1000+now.getMonth()*100+now.getDate()){
+                    this.$store.commit("modDate",{date:this.year +"-"+ this.week+ "-" + this.day});
                 }else{
                     alert("请输入正确的截止日期")
                     return false;
                 }
                 this.btn = false;
-                this.$store.commit("modDate",{date:this.date})
             },
         },
-        mounted:function(){
-            this.$store.commit("modDate",{date:this.date});
-        },
-    watch:{
-        seen:function(newValue,oldValue){
-            this.btn = newValue;        
+        watch:{
+            seen:function(newValue,oldValue){
+                this.btn = newValue;        
+            }
         }
-    }
 }
 function getToDay(){
     var now = new Date();

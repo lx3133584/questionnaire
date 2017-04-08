@@ -14,7 +14,8 @@
   			<tr v-for="(item,index) in list">
   				<!-- <td><input type="checkbox"></td> -->
   				<td>{{item.title}}</td>
-  				<td>{{item.date}}</td>
+  				<td v-if='item.date'>{{item.date}}</td>
+					<td v-else>无期限</td>
   				<td>{{item.status}}</td>
   				<td>
 	  				<button @click="edit(index)" v-if="item.status=='未发布'">编辑</button>
@@ -41,7 +42,7 @@ export default {
   methods:{
   	edit:function(index){
   		this.$store.commit('reset',{index:index});
-  		this.$router.push({ path: 'new', query: { index: index }});
+  		this.$router.push({ path: 'edit', query: { index: index }});
   	},
     del:function(index){
       this.$store.commit('removeNaire',{index:index});

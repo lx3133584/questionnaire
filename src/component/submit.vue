@@ -14,6 +14,7 @@ export default {
     save:function(index){
       if(index!=undefined){
         this.$store.commit('save',{index:index});
+        this.$store.commit('switchEditing',{boolean:false});
       }
       else{
         this.$store.commit('save');
@@ -24,6 +25,7 @@ export default {
     submit:function(index){
       if(index!=undefined){
         this.$store.commit('submit',{index:index});
+        this.$store.commit('switchEditing',{boolean:false});
       }
       else{
         this.$store.commit('submit');

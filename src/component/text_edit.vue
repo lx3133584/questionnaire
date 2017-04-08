@@ -24,7 +24,7 @@ export default {
   props : ['text','sClass','iClass'],
   mounted: function () {
     // 避免直接使用pros属性，通过计算方法重置
-    return this.edit_text=this.text
+    return this.edit_text = this.text
   },
   methods:{
     edit:function(){

@@ -17,7 +17,7 @@ import Navs from './component/navs.vue';
 import New from './component/new.vue';
 import List from './component/list.vue';
 import View from './component/view.vue';
-
+import Edit from './component/edit.vue';
 
 // 创建一个路由器实例
 // 并且配置路由规则
@@ -44,6 +44,10 @@ const router = new VueRouter({
     {
       path: '/que/view',
       component: View
+    },
+    {
+      path: '/que/edit',
+      component: Edit
     }
   ]
 })
@@ -57,13 +61,14 @@ const store = new Vuex.Store({
                         type:'radio',    //问题的类型
                         title:'请输入标题',   //问题的标题
                         required:false, //问题是否必填
-                        options:['选项']   //选项
+                        options:['选项1','选项2']   //选项
                       }],
                       date:'',//截止日期
                       status:'未保存'//发布状态
                     },
     list: [],
     seen: false,//判断是否显示日历模块
+    editing: {boolean:false,index:0},//是否正在编辑问卷状态和编辑问卷的index
     name: ""//存放登录用户的用户名
   },
   mutations: {
@@ -79,7 +84,7 @@ const store = new Vuex.Store({
       state.questionnaire.title = arr.title
     },
     addQuestion (state,arr){//添加指定类型的问题
-      state.questionnaire.questions.push({type:arr.type,title:'请输入标题', required:false, options:['选项']})
+      state.questionnaire.questions.push({type:arr.type,title:'请输入标题', required:false, options:['选项1','选项2']})
     },
     modQuestionTitle (state,arr) {//修改问卷标题
       state.questionnaire.questions[arr.index].title = arr.title
@@ -169,7 +174,7 @@ const store = new Vuex.Store({
         });
       }
       else{
-        state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项']}],date:'',status:'未保存'}
+        state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项1','选项2']}],date:'',status:'未保存'}
       }
     },
     removeNaire (state,arr) {//删除问卷
@@ -203,8 +208,12 @@ const store = new Vuex.Store({
           alert("error"+response.headers)
         });
     },
-    switchSeen (state,arr) {
+    switchSeen (state,arr) {//切换日历显示状态
       state.seen = arr.seen
+    },
+    switchEditing (state,arr) {//切换编辑问卷状态
+      state.editing.boolean = arr.boolean;
+      state.editing.index = arr.index;
     }
      
   
