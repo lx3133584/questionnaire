@@ -135,7 +135,7 @@ function days(y,w){
             myday:function(day){
                 let now = new Date();
                 this.day = day;
-                if(this.year*10000+this.week*100+this.day>=now.getFullYear()*1000+now.getMonth()*100+now.getDate()){
+                if(this.year*10000+this.week*100+this.day>=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate()){
                     this.$store.commit("modDate",{date:this.year +"-"+ this.week+ "-" + this.day});
                 }else{
                     alert("请输入正确的截止日期")
