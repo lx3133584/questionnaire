@@ -127,8 +127,7 @@ body{
     text-align: center;
 }
 .success p{
-    height: 6em;
-    line-height: 6em;
+    margin: 3em auto;
     font-size: 3rem;
 }
 

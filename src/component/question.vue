@@ -173,7 +173,7 @@ export default {
 #question>button:hover{
   border: dashed 2px #ccc;
 }
-#question>button:focus{
-  border: none;
+#question button:focus{
+  outline: none;
 }
 </style>

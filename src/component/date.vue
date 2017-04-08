@@ -12,17 +12,18 @@
                 <ul class="e"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul>
             </div>
             <div class="table">
-            <ul>
-                <template v-for="fts in ft">
-                    <li class="def front">{{fts}}</li>
-                </template>
-                <template v-for="cts in ct">
-                    <li class="center" @click="myday(cts)">{{cts}}</li>
-                </template>
-                <template v-for="ats in at">
-                    <li class="def after">{{ats}}</li>
-                </template>
-            </ul>
+                <ul>
+                    <template v-for="fts in ft">
+                        <li class="def front">{{fts}}</li>
+                    </template>
+                    <template v-for="cts in ct">
+                        <li class="center" @click="myday(cts)">{{cts}}</li>
+                    </template>
+                    <template v-for="ats in at">
+                        <li class="def after">{{ats}}</li>
+                    </template>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -222,5 +223,8 @@ function getToDay(){
     font-size: 16px;
     color: #fff;
     background: rgba(255,255,255,0.4);
+}
+.date .iconfont{
+    cursor: pointer;
 }
 </style>

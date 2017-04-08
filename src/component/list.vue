@@ -1,6 +1,6 @@
 <template>
   <div id="list">
-  	<table border="4">
+  	<table>
   		<thead>
   			<tr>
   				<!-- <th><input type="checkbox"></th> -->
@@ -64,6 +64,7 @@ export default {
 }
 #list table{
 	margin: 0 auto;
+	border: 2px solid rgba(255,255,255,0.2);
 }
 #list table th,#list table td{
   color: #fff;
@@ -72,11 +73,22 @@ export default {
 #list table input{
 	margin: 0 10px;
 }
-#list table thead{
+#list table thead tr{
 	font-size: 2.5rem;
+	height: 2em;
+	line-height: 2em;
+	cursor:default;
+	background: rgba(255,255,255,0.4);
 }
-#list table tbody{
-	font-size: 2rem
+#list table tbody tr{
+	font-size: 2rem;
+	height: 2em;
+	line-height: 2em;
+	border-bottom: 1px solid #333;
+	cursor:default;
+}
+#list table tbody tr:hover{
+	background: rgba(255,255,255,0.2);
 }
 #list table tbody button{
   font-size: 1.8rem;
