@@ -4,7 +4,7 @@
     <label><input type="checkbox" v-model="required" @click="modRequired">此题是否必填</label>
     <h2>
       Q{{index+1}}（{{type_name}}）
-      <edit :text="title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></edit>
+      <text_edit :text="title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></text_edit>
     </h2>
     <ul>
       <li v-if="type==='text'">
@@ -12,7 +12,7 @@
       </li>
       <li v-else v-for="(item,index) in options">
         <i :class="icon+type"></i>
-        <edit :text="options[index]" @transferData="pullData" @transferIndex="pullIndex(index)"></edit>
+        <text_edit :text="options[index]" @transferData="pullData" @transferIndex="pullIndex(index)"></text_edit>
         <i class="iconfont icon-close" @click="removeOption(index)"></i>
       </li>
     </ul>
@@ -28,7 +28,7 @@
 </template>
 
 <script type="text/javascript">
-import Edit from './edit.vue';
+import Text_edit from './text_edit.vue';
 
 export default {
   data () {
@@ -103,7 +103,7 @@ export default {
       this.$store.commit('modQuestionRequired',{index:this.index,required:!this.required})
     }
   },
-  components: { Edit }
+  components: { Text_edit }
     
 }
 </script>

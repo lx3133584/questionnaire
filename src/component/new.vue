@@ -1,6 +1,6 @@
 <template>
   <div id="new" @click.self="hideDate">
-    <edit :text="title" sClass="sTitle" iClass="iTitle" @transferData="pullTitle"></edit>
+    <text_edit :text="title" sClass="sTitle" iClass="iTitle" @transferData="pullTitle"></text_edit>
     <div class="main" @click="hideDate">
       <question_list></question_list>
     </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/javascript">
-import Edit from './edit.vue';
+import Text_edit from './text_edit.vue';
 import Question_list from './question_list.vue';
 import Submit from './submit.vue';
 import Date from './date.vue';
@@ -35,7 +35,7 @@ export default {
       }
     }
   },
-  components: { Question_list, Edit, Submit, Date }
+  components: { Question_list, Text_edit, Submit, Date }
 }
 </script>
 

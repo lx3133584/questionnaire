@@ -18,6 +18,7 @@ import New from './component/new.vue';
 import List from './component/list.vue';
 import View from './component/view.vue';
 
+
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
