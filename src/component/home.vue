@@ -1,7 +1,8 @@
 <template>
   <div id="home">
 	<p>{{hello}}，{{name}}<br>{{msg}}</p>
-	<router-link :to='btn.link'>{{btn.text}}</router-link>
+	<router-link v-if='length>0' to='/que/list'>我的问卷</router-link>
+	<router-link v-else to='/que/new'>新的问卷</router-link>
   </div>
 </template>
 
@@ -10,8 +11,7 @@ export default {
   data () {
     return {
       hello: "你好",
-      msg:"欢迎来到调差问卷！",
-      btn:{link:'/que/list',text:'问卷列表'}
+      msg:"欢迎来到调差问卷！"
   	}
   },
   computed: {
@@ -23,16 +23,8 @@ export default {
   	}
   },
   mounted () {
-	this.$store.commit('getList');	
-	if (this.length>0){
-		this.btn.link = "/que/list";
-		this.btn.text = "我的问卷";
-	}
-	else {
-		this.btn.link = "/que/new";
-		this.btn.text = "新建问卷";
-	}
-	this.$store.commit('getName');
+		this.$store.commit('getList');
+		this.$store.commit('getName');
   }
 }
 </script>
