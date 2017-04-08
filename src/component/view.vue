@@ -61,7 +61,7 @@ export default {
   },
   methods:{
     back:function(){
-      this.$router.push('/que/list');
+      this.$router.push('/list');
     },
   }
 }

@@ -5,7 +5,7 @@
     		<router-link :to='item.link'>{{item.title}}</router-link>
     	</li>
 			<li>
-				<router-link to='/que/edit' v-if='nav_edit'>编辑问卷</router-link>
+				<router-link to='/edit' v-if='nav_edit'>编辑问卷</router-link>
 			</li>
     </ul>
   </div>
@@ -16,9 +16,9 @@ export default {
   data () {
     return {
       nav_list:[//导航栏列表中的项
-      	{link:'/que',title:'问卷调查'},
-      	{link:'/que/list',title:'问卷列表'},
-      	{link:'/que/new',title:'新建问卷'}
+      	{link:'/',title:'问卷调查'},
+      	{link:'/list',title:'问卷列表'},
+      	{link:'/new',title:'新建问卷'}
       ]
     }
   },

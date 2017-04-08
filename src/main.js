@@ -22,31 +22,30 @@ import Edit from './component/edit.vue';
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
-  mode: 'history',
   base: __dirname,
   routes: [
     {
-      path: '/que',
+      path: '/',
       component: Home
     },
     {
-      path: '/que/navs',
+      path: '/navs',
       component: Navs
     },
     {
-      path: '/que/new',
+      path: '/new',
       component: New
     },
     {
-      path: '/que/list',
+      path: '/list',
       component: List
     },
     {
-      path: '/que/view',
+      path: '/view',
       component: View
     },
     {
-      path: '/que/edit',
+      path: '/edit',
       component: Edit
     }
   ]
@@ -73,8 +72,8 @@ const store = new Vuex.Store({
   },
   mutations: {
     getName (state) {//得到用户的用户名
-       Vue.http.options.root = '/que';
-       Vue.http.get('data.php').then(response => {
+       Vue.http.options.root = '.';
+       Vue.http.get('./data.php').then(response => {
          state.name = response.body;
        }, response => {
          alert("error"+response.headers)
@@ -128,7 +127,7 @@ const store = new Vuex.Store({
     save (state,arr){//保存问卷
       state.questionnaire.status = "未发布";
       if(arr){
-        Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
+        Vue.http.post('./data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
         .then(response => {
           console.log('成功保存并把问卷状态改为未发布')
         }, response => {
@@ -136,7 +135,7 @@ const store = new Vuex.Store({
         });
       }
       else{
-        Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
+        Vue.http.post('./data.php',{"type":"add","data":state.questionnaire})
         .then(response => {
           console.log('成功保存并把问卷状态改为未发布')
         }, response => {
@@ -147,7 +146,7 @@ const store = new Vuex.Store({
     submit (state,arr){//保存并把问卷状态改为发布
       state.questionnaire.status = "已发布";
       if(arr){
-        Vue.http.post('data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
+        Vue.http.post('./data.php',{"type":"mod","index":arr.index,"data":state.questionnaire})
         .then(response => {
           console.log('成功保存并把问卷状态改为已发布')
         }, response => {
@@ -155,7 +154,7 @@ const store = new Vuex.Store({
         });
       }
       else{
-        Vue.http.post('data.php',{"type":"add","data":state.questionnaire})
+        Vue.http.post('./data.php',{"type":"add","data":state.questionnaire})
         .then(response => {
           console.log('成功保存并把问卷状态改为已发布')
         }, response => {
@@ -165,7 +164,7 @@ const store = new Vuex.Store({
     },
     reset (state,arr){//重置正在编辑的问卷
       if(arr){
-        Vue.http.post('data.php',{"type":"get","index":arr.index})
+        Vue.http.post('./data.php',{"type":"get","index":arr.index})
         .then(response => {
           state.questionnaire = JSON.parse(response.body);
           console.log('成功重置正在编辑的问卷');
@@ -179,7 +178,7 @@ const store = new Vuex.Store({
     },
     removeNaire (state,arr) {//删除问卷
       state.list.splice(arr.index,1)
-      Vue.http.post('data.php',{"type":"del","index":arr.index})
+      Vue.http.post('./data.php',{"type":"del","index":arr.index})
         .then(response => {
           console.log('成功删除问卷');
         }, response => {
@@ -187,7 +186,7 @@ const store = new Vuex.Store({
         });
     },
     getList (state) {//得到问卷列表
-      Vue.http.post('data.php',{"type":"list"})
+      Vue.http.post('./data.php',{"type":"list"})
         .then(response => {
           if(response.body!=0){
             if(response.body.indexOf("++") !== -1){

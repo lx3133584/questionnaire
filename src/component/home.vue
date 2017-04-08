@@ -1,8 +1,8 @@
 <template>
   <div id="home">
 	<p>{{hello}}，{{name}}<br>{{msg}}</p>
-	<router-link v-if='length>0' to='/que/list'>我的问卷</router-link>
-	<router-link v-else to='/que/new'>新的问卷</router-link>
+	<router-link v-if='length>0' to='/list'>我的问卷</router-link>
+	<router-link v-else to='/new'>新的问卷</router-link>
   </div>
 </template>
 
