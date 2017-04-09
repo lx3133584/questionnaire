@@ -17,7 +17,7 @@ const store = new Vuex.Store({
                         required:false, //问题是否必填
                         options:['选项','选项']   //选项
                       }],
-                      date:'',//截止日期
+                      date:'2017-1-1',//截止日期
                       status:'未保存'//发布状态
                     },
     list: [],
