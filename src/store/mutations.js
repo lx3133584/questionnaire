@@ -1,4 +1,12 @@
 export default {
+    reset(state, arr) {//重置正在编辑的问卷
+        if (arr) {
+            state.questionnaire = state.list[arr.index];
+        }
+        else {
+            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: ['选项', '选项'] }], date: '2017-1-1', status: '未保存' }
+        }
+    },
     modNaireTitle(state, arr) {//修改问卷标题
         state.questionnaire.title = arr.title
     },

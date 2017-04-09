@@ -13,9 +13,8 @@ export default {
   methods:{
     save:function(index,type){
         this.$store.dispatch('save',{index:index,type:type}).then(()=>{
-          this.$store.dispatch('reset').then(()=>{
-            this.$router.push('/list');
-          })
+          this.$store.commit('reset')
+          this.$router.push('/list')
         })
     }
   }

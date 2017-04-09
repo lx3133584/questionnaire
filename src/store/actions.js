@@ -26,7 +26,6 @@ export default {
     getList({ state, dispatch }) {//得到问卷列表
         return Vue.http.post('./data.php', { "type": "list" })
             .then(response => {
-                var flag = [];
                 if (response.body != 0) {
                     if (response.body.indexOf("++") !== -1) {
                         state.list = response.body.split('++');
@@ -38,15 +37,11 @@ export default {
                         state.list[i] = JSON.parse(state.list[i]);
                         if (overdue(state.list[i].date)) {
                             state.list[i].date = '已过期';
-                            flag.push(i);
                         }
                     }
                 }
                 else {
                     state.list = []
-                }
-                if (flag) {
-                    dispatch('save', { type: '已过期' })
                 }
 
             }, response => {
@@ -54,47 +49,23 @@ export default {
             });
     },
     save({ state, commit }, arr) {//保存问卷
-        if (arr.type == '已过期') {
-            return Vue.http.post('./data.php', { "type": "saveList", "data": state.list })
+        state.questionnaire.status = arr.type;
+        if (arr.index != undefined) {
+            return Vue.http.post('./data.php', { "type": "mod", "index": arr.index, "data": state.questionnaire })
                 .then(response => {
-                    console.log('成功保存问卷列表');
-                }, response => {
-                    alert("error" + response.headers)
-                })
-        }
-        else {
-            state.questionnaire.status = arr.type;
-            if (arr.index != undefined) {
-                return Vue.http.post('./data.php', { "type": "mod", "index": arr.index, "data": state.questionnaire })
-                    .then(response => {
-                        console.log('修改问卷成功并保存，问卷状态为' + arr.type);
-                        commit('switchEditing', { boolean: false });
-                    }, response => {
-                        alert("error" + response.headers)
-                    });
-            }
-            else {
-                return Vue.http.post('./data.php', { "type": "add", "data": state.questionnaire })
-                    .then(response => {
-                        console.log('增加问卷成功并保存，问卷状态为' + arr.type);
-                    }, response => {
-                        alert("error" + response.headers)
-                    });
-            }
-        }
-    },
-    reset({ state }, arr) {//重置正在编辑的问卷
-        if (arr) {
-            return Vue.http.post('./data.php', { "type": "get", "index": arr.index })
-                .then(response => {
-                    state.questionnaire = JSON.parse(response.body);
-                    console.log('成功重置正在编辑的问卷');
+                    console.log('修改问卷成功并保存，问卷状态为' + arr.type);
+                    commit('switchEditing', { boolean: false });
                 }, response => {
                     alert("error" + response.headers)
                 });
         }
         else {
-            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: ['选项', '选项'] }], date: '2017-1-1', status: '未保存' }
+            return Vue.http.post('./data.php', { "type": "add", "data": state.questionnaire })
+                .then(response => {
+                    console.log('增加问卷成功并保存，问卷状态为' + arr.type);
+                }, response => {
+                    alert("error" + response.headers)
+                });
         }
     },
     removeNaire({ state }, arr) {//删除问卷

@@ -163,7 +163,7 @@ function getList(){
 		echo $row[0];
 	}
 	else{
-		echo '{"success":false,"message":"Error: " . $sql . "<br>" . $conn->error}';
+		echo '';
 	}
 
 }

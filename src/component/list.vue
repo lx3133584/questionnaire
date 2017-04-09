@@ -20,8 +20,8 @@
   				<td>
 	  				<button @click="edit(index)" v-if="item.status=='未发布'">编辑</button>
 	  				<button @click="del(index)">删除</button>
-	  				<button @click="view(index)">查看问卷</button>
-	  				<button v-if="item.status=='已发布'">查看数据</button>
+	  				<button @click="view(index)">查看</button>
+	  				<button v-if="item.status=='已发布'">统计</button>
   				</td>
   			</tr>
   		</tbody>
@@ -41,9 +41,8 @@ export default {
   },
   methods:{
   	edit:function(index){
-  		this.$store.dispatch('reset',{index:index}).then(()=>{
-				this.$router.push({ path: 'edit', query: { index: index }});
-			})
+  		this.$store.commit('reset',{index:index})
+			this.$router.push({ path: 'edit', query: { index: index }});
   	},
     del:function(index){
       this.$store.dispatch('removeNaire',{index:index});
