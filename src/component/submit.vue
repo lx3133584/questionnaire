@@ -13,15 +13,17 @@ export default {
   methods:{
     save:function(index){
         this.$store.dispatch('save',{index:index}).then(()=>{
-          this.$store.commit('reset');
-          this.$router.push('/list');
-        });
+          this.$store.dispatch('reset').then(()=>{
+            this.$router.push('/list');
+          })
+        })
     },
     submit:function(index){
       this.$store.dispatch('submit',{index:index}).then(()=>{
-          this.$store.commit('reset');
-          this.$router.push('/list');
-        });
+          this.$store.dispatch('reset').then(()=>{
+            this.$router.push('/list');
+          })
+        })
     }
   }
 }

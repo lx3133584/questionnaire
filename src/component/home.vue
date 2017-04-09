@@ -23,8 +23,8 @@ export default {
   	}
   },
   mounted () {
-		this.$store.commit('getList');
-		this.$store.commit('getName');
+		this.$store.dispatch('getList');
+		this.$store.dispatch('getName');
   }
 }
 </script>

@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted:function(){
-    this.$store.commit('reset');
+    this.$store.dispatch('reset');
     this.$store.commit('switchEditing',{boolean:false});
   },
   methods:{

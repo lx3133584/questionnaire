@@ -37,15 +37,16 @@ export default {
     }
   },
   mounted:function(){
-    this.$store.commit('getList');
+    this.$store.dispatch('getList');
   },
   methods:{
   	edit:function(index){
-  		this.$store.commit('reset',{index:index});
-  		this.$router.push({ path: 'edit', query: { index: index }});
+  		this.$store.dispatch('reset',{index:index}).then(()=>{
+				this.$router.push({ path: 'edit', query: { index: index }});
+			})
   	},
     del:function(index){
-      this.$store.commit('removeNaire',{index:index});
+      this.$store.dispatch('removeNaire',{index:index});
     },
     view:function(index){
       this.$router.push({ path: 'view', query: { index: index }})
