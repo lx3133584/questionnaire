@@ -19,7 +19,7 @@ if (!(isset($_SESSION["admin"]) && $_SESSION["admin"] === true)) {
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>问卷调查后台管理</title>
+    <title>问卷调查后台管理系统</title>
     <!-- <link rel="stylesheet" href="/./src/assets/font/iconfont.css"> -->
     <link rel="stylesheet" href="./dist/font/iconfont.css">
   </head>

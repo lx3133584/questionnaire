@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       hello: "你好",
-      msg:"欢迎来到调差问卷！"
+      msg:"欢迎来到问卷管理系统！"
   	}
   },
   computed: {
