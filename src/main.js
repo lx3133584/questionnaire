@@ -60,7 +60,7 @@ const store = new Vuex.Store({
                         type:'radio',    //问题的类型
                         title:'请输入标题',   //问题的标题
                         required:false, //问题是否必填
-                        options:['选项1','选项2']   //选项
+                        options:['选项','选项']   //选项
                       }],
                       date:'',//截止日期
                       status:'未保存'//发布状态
@@ -83,7 +83,7 @@ const store = new Vuex.Store({
       state.questionnaire.title = arr.title
     },
     addQuestion (state,arr){//添加指定类型的问题
-      state.questionnaire.questions.push({type:arr.type,title:'请输入标题', required:false, options:['选项1','选项2']})
+      state.questionnaire.questions.push({type:arr.type,title:'请输入标题', required:false, options:['选项','选项']})
     },
     modQuestionTitle (state,arr) {//修改问卷标题
       state.questionnaire.questions[arr.index].title = arr.title
@@ -173,7 +173,7 @@ const store = new Vuex.Store({
         });
       }
       else{
-        state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项1','选项2']}],date:'',status:'未保存'}
+        state.questionnaire = { title:'请输入标题',questions:[{type:'radio',title:'请输入标题',required:false,options:['选项','选项']}],date:'',status:'未保存'}
       }
     },
     removeNaire (state,arr) {//删除问卷

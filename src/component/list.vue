@@ -79,7 +79,7 @@ export default {
 	height: 2em;
 	line-height: 2em;
 	cursor:default;
-	background: rgba(255,255,255,0.4);
+	background: rgba(255,255,255,0.3);
 }
 #list table tbody tr{
 	font-size: 2rem;
