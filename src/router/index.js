@@ -1,14 +1,14 @@
-import Vue from 'vue';
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from "vue-router"
 // 定义组件
-import Home from '../component/home.vue';
-import Navs from '../component/navs.vue';
-import New from '../component/new.vue';
-import List from '../component/list.vue';
-import View from '../component/view.vue';
-import Edit from '../component/edit.vue';
+import Home from '../component/home.vue'
+import Navs from '../component/navs.vue'
+import New from '../component/new.vue'
+import List from '../component/list.vue'
+import View from '../component/view.vue'
+import Edit from '../component/edit.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
 // 创建一个路由器实例
 // 并且配置路由规则

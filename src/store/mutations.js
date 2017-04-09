@@ -54,44 +54,6 @@ export default {
     modDate(state, arr) {//修改截止日期
         state.questionnaire.date = arr.date
     },
-    save(state, arr) {//保存问卷
-        state.questionnaire.status = "未发布";
-        if (arr) {
-            Vue.http.post('./data.php', { "type": "mod", "index": arr.index, "data": state.questionnaire })
-                .then(response => {
-                    console.log('成功保存并把问卷状态改为未发布')
-                }, response => {
-                    alert("error" + response.headers)
-                });
-        }
-        else {
-            Vue.http.post('./data.php', { "type": "add", "data": state.questionnaire })
-                .then(response => {
-                    console.log('成功保存并把问卷状态改为未发布')
-                }, response => {
-                    alert("error" + response.headers)
-                });
-        }
-    },
-    submit(state, arr) {//保存并把问卷状态改为发布
-        state.questionnaire.status = "已发布";
-        if (arr) {
-            Vue.http.post('./data.php', { "type": "mod", "index": arr.index, "data": state.questionnaire })
-                .then(response => {
-                    console.log('成功保存并把问卷状态改为已发布')
-                }, response => {
-                    alert("error" + response.headers)
-                });
-        }
-        else {
-            Vue.http.post('./data.php', { "type": "add", "data": state.questionnaire })
-                .then(response => {
-                    console.log('成功保存并把问卷状态改为已发布')
-                }, response => {
-                    alert("error" + response.headers)
-                });
-        }
-    },
     reset(state, arr) {//重置正在编辑的问卷
         if (arr) {
             Vue.http.post('./data.php', { "type": "get", "index": arr.index })

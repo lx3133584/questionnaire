@@ -12,26 +12,16 @@ export default {
   props:{index:Number},
   methods:{
     save:function(index){
-      if(index!=undefined){
-        this.$store.commit('save',{index:index});
-        this.$store.commit('switchEditing',{boolean:false});
-      }
-      else{
-        this.$store.commit('save');
-      }
-      this.$store.commit('reset');
-      this.$router.push('/list');
+        this.$store.dispatch('save',{index:index}).then(()=>{
+          this.$store.commit('reset');
+          this.$router.push('/list');
+        });
     },
     submit:function(index){
-      if(index!=undefined){
-        this.$store.commit('submit',{index:index});
-        this.$store.commit('switchEditing',{boolean:false});
-      }
-      else{
-        this.$store.commit('submit');
-      }
-      this.$store.commit('reset');
-      this.$router.push('/list');
+      this.$store.dispatch('submit',{index:index}).then(()=>{
+          this.$store.commit('reset');
+          this.$router.push('/list');
+        });
     }
   }
 }
