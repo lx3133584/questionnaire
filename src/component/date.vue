@@ -7,8 +7,9 @@
                 {{year}}
                 <span class="iconfont icon-front" @click="add('y')"></span>
                 <span class="iconfont icon-back" @click="lessen"></span>
-                {{week}}
+                {{month}}
                 <span class="iconfont icon-front" @click="add"></span>
+                <span class="iconfont icon-close" @click="close"></span>
                 <ul class="e"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul>
             </div>
             <div class="table">
@@ -31,7 +32,7 @@
 let ft = new Array();
 let ct = new Array();
 let at = new Array();
-let week = function(y,w,d){
+let month = function(y,w,d){
     var x = new Date(y,w,d).getDay();
     return x ;
 }
@@ -44,7 +45,7 @@ function days(y,w){
             return {
                 btn: false,
                 day: Number,
-                week: new Date().getMonth() + 1,
+                month: new Date().getMonth() + 1,
                 year: new Date().getFullYear(),
                 ft:[],
                 ct:[],
@@ -65,12 +66,12 @@ function days(y,w){
                     this.year = this.year+1;
                     this.datas()
                 }else {
-                    if(this.week == 12){
+                    if(this.month == 12){
                         this.year++;
-                        this.week = 1;
+                        this.month = 1;
                         this.datas()
                     }else{
-                        this.week = this.week+1;
+                        this.month = this.month+1;
                         this.datas()
                     }
                 }
@@ -80,18 +81,18 @@ function days(y,w){
                     this.year = this.year-1;
                     this.datas()
                 }else {
-                    if(this.week == 1){
+                    if(this.month == 1){
                         this.year--;
-                        this.week = 12;
+                        this.month = 12;
                         this.datas()
                     }else{
-                        this.week = this.week-1;
+                        this.month = this.month-1;
                         this.datas()
                     }
                 }
             },
             datas: function(){
-                function weeks(y,w,d){
+                function months(y,w,d){
                     var x = new Date(y,w,d).getDay();
                     return x ;
                 }
@@ -102,8 +103,8 @@ function days(y,w){
                 this.ft = [];
                 this.ct = [];
                 this.at = [];
-                let w = this.week-1,y = this.year;
-                let one = weeks(y,w,1);
+                let w = this.month-1,y = this.year;
+                let one = months(y,w,1);
                 let front = 0;
                 let after = 0;
                 w == 0?front = days(y-1,11):front = days(y,w);
@@ -119,7 +120,7 @@ function days(y,w){
                     this.ft.reverse()
                 }
                 // 本月
-                for(let i=0;i<days(this.year,this.week);i++){
+                for(let i=0;i<days(this.year,this.month);i++){
                     this.ct[i] = i+1;
                 }
                 // 末尾
@@ -129,20 +130,22 @@ function days(y,w){
                         this.at[i] = i+1;
                     }            
                 }
-                this.btn = true;
                 this.$store.commit("switchSeen",{seen:true});
             },
             myday:function(day){
                 let now = new Date();
                 this.day = day;
-                if(this.year*10000+this.week*100+this.day>=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate()){
-                    this.$store.commit("modDate",{date:this.year +"-"+ this.week+ "-" + this.day});
+                if(this.year*10000+this.month*100+this.day>=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate()){
+                    this.$store.commit("modDate",{date:this.year +"-"+ this.month+ "-" + this.day});
                 }else{
                     alert("请输入正确的截止日期")
                     return false;
                 }
-                this.btn = false;
+                this.$store.commit("switchSeen",{seen:false});
             },
+            close:function(){
+                this.$store.commit("switchSeen",{seen:false});
+            }
         },
         watch:{
             seen:function(newValue,oldValue){
@@ -205,7 +208,7 @@ function getToDay(){
     border-radius: 20px;
 }
 .date .table li.center:hover{
-    background: #337AB7;
+    background: rgba(255,152,0,0.6);
     color: #fff;
 }
 .date .panel{
@@ -222,5 +225,11 @@ function getToDay(){
 }
 .date .iconfont{
     cursor: pointer;
+}
+.date .icon-close{
+    float: right;
+    font-size: 20px;
+    margin-top: 0.4em;
+    margin-right: 0.4em;
 }
 </style>
