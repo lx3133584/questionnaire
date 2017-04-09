@@ -55,12 +55,12 @@ function create(){
 	$query=mysql_query($sql);
 
 	if ($query == TRUE) {
-	    echo '{"success":true,"message":"注册成功"}';
 		// 当验证通过后，启动 Session
 		session_start();
 		// 注册登陆成功的 admin 变量，并赋值 true
 		$_SESSION["admin"] = true;
 		$_SESSION['account'] = $account;
+		echo '{"success":true,"message":"注册成功"}';
 	} 
 	else {
 	    echo '{"success":false,"message":"Error: " . $sql . "<br>" . $conn->error}';
