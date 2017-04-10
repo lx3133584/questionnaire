@@ -49,6 +49,7 @@ export default {
 	font-size: 2rem;
 	background: #fff;
 	box-shadow: #000 1px 0 5px;
+	z-index: 999;
 }
 #navs li{
   display: inline-block;
