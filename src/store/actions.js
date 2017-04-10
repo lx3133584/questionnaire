@@ -36,7 +36,7 @@ export default {
                     for (var i = 0; i < state.list.length; i++) {
                         state.list[i] = JSON.parse(state.list[i]);
                         if (overdue(state.list[i].date)) {
-                            state.list[i].date = '已过期';
+                            state.list[i].status = '已过期';
                         }
                     }
                 }
