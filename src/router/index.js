@@ -7,6 +7,7 @@ import New from '../component/new.vue'
 import List from '../component/list.vue'
 import View from '../component/view.vue'
 import Edit from '../component/edit.vue'
+import Statistics from '../component/statistics.vue'
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
         {
             path: '/edit',
             component: Edit
+        },
+        {
+            path: '/statistics',
+            component: Statistics
         }
     ]
 })

@@ -21,7 +21,7 @@
 	  				<button @click="edit(index)" v-if="item.status=='未发布'||item.status=='已过期'">编辑</button>
 	  				<button @click="del(index)">删除</button>
 	  				<button @click="view(index)">查看</button>
-	  				<button v-if="item.status=='已发布'">统计</button>
+	  				<button @click="statistics(index)" v-if="item.status=='已发布'">统计</button>
   				</td>
   			</tr>
   		</tbody>
@@ -49,7 +49,10 @@ export default {
     },
     view:function(index){
       this.$router.push({ path: 'view', query: { index: index }})
-    }
+    },
+		statistics:function(index){
+			this.$router.push({ path: 'statistics', query: { index: index }})
+		}
   }
 }
 </script>

@@ -44,4 +44,7 @@ a{
 a:hover{
   color: #ff9800;
 }
+input,textarea,button{
+  outline: rgba(255,152,0,0.8);
+}
 </style>
