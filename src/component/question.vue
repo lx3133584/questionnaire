@@ -41,16 +41,16 @@ export default {
       index: Number,
   },
   computed: {
-    title () {
+    title() {
       return this.$store.state.questionnaire.questions[this.index].title
     },
-    length () {
+    length() {
       return this.$store.state.questionnaire.questions.length
     },
-    type () {
+    type() {
       return this.$store.state.questionnaire.questions[this.index].type
     },
-    type_name () {
+    type_name() {
       switch (this.type){
         case "radio":
           return "单选题";
@@ -63,10 +63,10 @@ export default {
           break;
       };
     },
-    required () {
+    required() {
       return this.$store.state.questionnaire.questions[this.index].required
     },
-    options () {
+    options() {
       return this.$store.state.questionnaire.questions[this.index].options
     }
   },

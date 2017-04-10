@@ -53,14 +53,14 @@ function days(y,w){
             }
         },
         computed:{
-            seen(){
+            seen() {
                 return this.$store.state.seen
             },
-            date(){
+            date() {
                 return this.$store.state.questionnaire.date
             }
         },
-        methods:{
+        methods: {
             add: function(d){
                 if(d == "y"){
                     this.year = this.year+1;
@@ -76,7 +76,7 @@ function days(y,w){
                     }
                 }
             },
-            lessen:function(d){
+            lessen: function(d) {
                 if(d == "y"){
                     this.year = this.year-1;
                     this.datas()
@@ -91,7 +91,7 @@ function days(y,w){
                     }
                 }
             },
-            datas: function(){
+            datas: function() {
                 function months(y,w,d){
                     var x = new Date(y,w,d).getDay();
                     return x ;
@@ -132,7 +132,7 @@ function days(y,w){
                 }
                 this.$store.commit("switchSeen",{seen:true});
             },
-            myday:function(day){
+            myday: function(day) {
                 let now = new Date();
                 this.day = day;
                 if(this.year*10000+this.month*100+this.day>=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate()){
@@ -143,17 +143,17 @@ function days(y,w){
                 }
                 this.$store.commit("switchSeen",{seen:false});
             },
-            close:function(){
+            close: function() {
                 this.$store.commit("switchSeen",{seen:false});
             }
         },
-        watch:{
-            seen:function(newValue,oldValue){
+        watch: {
+            seen: function(newValue,oldValue) {
                 this.btn = newValue;        
             }
         }
 }
-function getToDay(){
+function getToDay() {
     var now = new Date();
     var nowYear = now.getFullYear();
     var nowMonth = now.getMonth()+1;

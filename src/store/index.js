@@ -21,7 +21,7 @@ const store = new Vuex.Store({
       date: '2017-1-1',//截止日期
       status: '未保存'//发布状态
     },
-    list: [],
+    list: [],    //问卷列表
     seen: false,//判断是否显示日历模块
     operating: {//正在操作问卷的状态和操作问卷的index
       type: false,//editing viewing statistics

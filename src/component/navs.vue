@@ -16,14 +16,14 @@
 
 <script type="text/javascript">
 export default {
-  data () {
+  data() {
     return {
-      nav_list:[//导航栏列表中的项
+      nav_list: [//导航栏列表中的项
       	{link:'/',title:'问卷调查'},
       	{link:'/list',title:'问卷列表'},
       	{link:'/new',title:'新建问卷'}
       ],
-			nav_temp:{//导航栏中临时的项
+			nav_temp: {//导航栏中临时的项
 				editing: {link:'/edit',title:'编辑问卷'},
 				viewing: {link:'/view',title:'查看问卷'},
 				statistics: {link:'/statistics',title:'问卷统计'}

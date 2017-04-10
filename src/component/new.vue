@@ -18,20 +18,20 @@ import Date from './date.vue';
 
 export default {
   computed: {
-    title () {
+    title() {
       return this.$store.state.questionnaire.title
     }
   },
-  mounted:function(){
+  mounted: function() {
     this.$store.commit('reset');
     this.$store.commit('switchOperating',{type:false});
   },
-  methods:{
-    pullTitle:function(data){//传递问题标题
+  methods: {
+    pullTitle:function(data) {//传递问题标题
       this.$store.commit('modNaireTitle',{title:data})
     },
-    hideDate:function(){
-      if(this.$store.state.seen){
+    hideDate: function() {
+      if(this.$store.state.seen) {
         this.$store.commit('switchSeen',{seen:false})
       }
     }

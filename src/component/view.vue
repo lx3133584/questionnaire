@@ -52,15 +52,15 @@
 
 export default {
   computed: {
-    naire () {
+    naire() {
       return this.$store.state.list[this.index]
     },
-    index () {
+    index() {
       return this.$store.state.operating.index
     }
   },
-  methods:{
-    back:function(){
+  methods: {
+    back: function() {
       this.$store.commit('switchOperating',{type:false});
       this.$router.push('/list');
     },

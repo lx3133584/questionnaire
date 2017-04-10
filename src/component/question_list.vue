@@ -22,22 +22,22 @@
 <script type="text/javascript">
 import Question from './question.vue';
 export default {
-  data () {
+  data() {
     return {
       add_seen:false
     }
   },
   computed: {
-    questions () {
+    questions() {
       return this.$store.state.questionnaire.questions
     }
   },
-  methods:{
-    addQuestion:function(type){//添加指定类型的问题
+  methods: {
+    addQuestion: function(type) {//添加指定类型的问题
       this.$store.commit('addQuestion',{type:type});
       this.add_seen = false;
     },
-    showAdd:function(){//切换 增加的题目类型的 显示
+    showAdd: function() {//切换 增加的题目类型的显示
       this.add_seen = !this.add_seen;
     }
   },
