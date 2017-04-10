@@ -12,7 +12,7 @@
             <li v-for="itemIn in item.options">
               <label>
               <input type="radio" :name="item.title">
-              {{itemIn}}
+              {{itemIn.name}}
               </label>
             </li>
           </ul>
@@ -26,7 +26,7 @@
             <li v-for="itemIn in item.options">
               <label>
               <input type="checkbox" :name="item.title">
-              {{itemIn}}
+              {{itemIn.name}}
               </label>
             </li>
           </ul>

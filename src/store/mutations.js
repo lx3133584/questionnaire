@@ -4,14 +4,14 @@ export default {
             state.questionnaire = state.list[arr.index];
         }
         else {
-            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: ['选项', '选项'] }], date: '2017-1-1', status: '未保存' }
+            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: [{ name: '选项', count: 0 }, { name: '选项', count: 0 }] }], date: '2017-1-1', status: '未保存' }
         }
     },
     modNaireTitle(state, arr) {//修改问卷标题
         state.questionnaire.title = arr.title
     },
     addQuestion(state, arr) {//添加指定类型的问题
-        state.questionnaire.questions.push({ type: arr.type, title: '请输入标题', required: false, options: ['选项', '选项'] })
+        state.questionnaire.questions.push({ type: arr.type, title: '请输入标题', required: false, options: [{ name: '选项', count: 0 }, { name: '选项', count: 0 }] })
     },
     modQuestionTitle(state, arr) {//修改问卷标题
         state.questionnaire.questions[arr.index].title = arr.title
@@ -41,13 +41,13 @@ export default {
         state.questionnaire.questions.splice(arr.index, 1);
     },
     addOption(state, arr) {//添加选项
-        state.questionnaire.questions[arr.index].options.push(arr.option)
+        state.questionnaire.questions[arr.index].options.push({name:arr.option,count:0})
     },
     removeOption(state, arr) {//删除选项
         state.questionnaire.questions[arr.index].options.splice(arr.oindex, 1)
     },
     modOption(state, arr) {//修改选项的值
-        state.questionnaire.questions[arr.index].options.splice(arr.oindex, 1, arr.option)
+        state.questionnaire.questions[arr.index].options[arr.oindex].name = arr.option
     },
     modDate(state, arr) {//修改截止日期
         state.questionnaire.date = arr.date

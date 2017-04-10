@@ -12,7 +12,7 @@
       </li>
       <li v-else v-for="(item,index) in options">
         <i :class="icon+type"></i>
-        <text_edit :text="options[index]" @transferData="pullData" @transferIndex="pullIndex(index)"></text_edit>
+        <text_edit :text="options[index].name" @transferData="pullData" @transferIndex="pullIndex(index)"></text_edit>
         <i class="iconfont icon-close" @click="removeOption(index)"></i>
       </li>
     </ul>

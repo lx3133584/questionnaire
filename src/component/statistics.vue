@@ -3,7 +3,7 @@
     <h1>{{naire.title}}</h1>
     <ul class="main">
       <li v-for="(item,index) in naire.questions">
-        <!-- 单选题 -->
+        <!-- 单选题/多选题 -->
         <template v-if="item.type=='radio'">
           <h2>Q{{index+1}} ( 单选题 ) {{item.title}}
             <span v-if="item.required" style="color:#EB3F3F">*</span>
@@ -12,21 +12,7 @@
             <li v-for="itemIn in item.options">
               <label>
               <input type="radio" :name="item.title">
-              {{itemIn}}
-              </label>
-            </li>
-          </ul>
-        </template>
-        <!-- 多选题 -->
-        <template v-if="item.type=='checkbox'">
-          <h2>Q{{index+1}} ( 多选题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
-          </h2>
-          <ul>
-            <li v-for="itemIn in item.options">
-              <label>
-              <input type="checkbox" :name="item.title">
-              {{itemIn}}
+              {{itemIn.name}}
               </label>
             </li>
           </ul>
