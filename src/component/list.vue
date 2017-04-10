@@ -18,7 +18,7 @@
 					<td v-else>无期限</td>
   				<td>{{item.status}}</td>
   				<td>
-	  				<button @click="edit(index)" v-if="item.status=='未发布'">编辑</button>
+	  				<button @click="edit(index)" v-if="item.status=='未发布'||item.status=='已过期'">编辑</button>
 	  				<button @click="del(index)">删除</button>
 	  				<button @click="view(index)">查看</button>
 	  				<button v-if="item.status=='已发布'">统计</button>
