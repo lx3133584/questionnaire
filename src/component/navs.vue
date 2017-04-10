@@ -5,7 +5,10 @@
     		<router-link :to='item.link'>{{item.title}}</router-link>
     	</li>
 			<li>
-				<router-link to='/edit' v-if='nav_edit'>编辑问卷</router-link>
+				<router-link v-if='operating_type' 
+										:to='nav_temp[operating_type].link'>
+										{{nav_temp[operating_type].title}}
+										</router-link>
 			</li>
     </ul>
   </div>
@@ -19,12 +22,17 @@ export default {
       	{link:'/',title:'问卷调查'},
       	{link:'/list',title:'问卷列表'},
       	{link:'/new',title:'新建问卷'}
-      ]
+      ],
+			nav_temp:{//导航栏中临时的项
+				editing: {link:'/edit',title:'编辑问卷'},
+				viewing: {link:'/view',title:'查看问卷'},
+				statistics: {link:'/statistics',title:'问卷统计'}
+			}
     }
   },
 	computed: {
-    nav_edit () {
-      return this.$store.state.editing.boolean
+    operating_type () {
+      return this.$store.state.operating.type
     }
   }
 }

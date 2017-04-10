@@ -56,11 +56,12 @@ export default {
       return this.$store.state.list[this.index]
     },
     index () {
-      return this.$route.query.index
+      return this.$store.state.operating.index
     }
   },
   methods:{
     back:function(){
+      this.$store.commit('switchOperating',{type:false});
       this.$router.push('/list');
     },
   }

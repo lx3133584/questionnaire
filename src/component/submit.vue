@@ -1,7 +1,7 @@
 <template>
   <div id="submit">
-    <button @click="save(index,'已发布')">提交问卷</button>
-    <button @click="save(index,'未发布')">保存问卷</button>  
+    <button @click="save(index, '已发布', type)">提交问卷</button>
+    <button @click="save(index, '未发布', type)">保存问卷</button>  
   </div>
 </template>
 
@@ -9,12 +9,18 @@
 
 
 export default {
-  props:{index:Number},
+  data(){
+    return {
+      type: this.$store.state.operating.type,
+      index: this.$store.state.operating.index
+    }
+  },
   methods:{
-    save:function(index,type){
-        this.$store.dispatch('save',{index:index,type:type}).then(()=>{
-          this.$store.commit('reset')
-          this.$router.push('/list')
+    save:function(index, status, type){
+        this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
+          this.$store.commit('switchOperating', { type: false });
+          this.$store.commit('reset');
+          this.$router.push('/list');
         })
     }
   }

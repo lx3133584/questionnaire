@@ -42,16 +42,19 @@ export default {
   methods:{
   	edit:function(index){
   		this.$store.commit('reset',{index:index})
-			this.$router.push({ path: 'edit', query: { index: index }});
+			this.$store.commit('switchOperating',{type:'editing',index:index});
+			this.$router.push({ path: 'edit'});
   	},
     del:function(index){
       this.$store.dispatch('removeNaire',{index:index});
     },
     view:function(index){
-      this.$router.push({ path: 'view', query: { index: index }})
+			this.$store.commit('switchOperating',{type:'viewing',index:index});
+      this.$router.push({ path: 'view'})
     },
 		statistics:function(index){
-			this.$router.push({ path: 'statistics', query: { index: index }})
+			this.$store.commit('switchOperating',{type:'statistics',index:index});
+			this.$router.push({ path: 'statistics'})
 		}
   }
 }

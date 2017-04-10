@@ -55,8 +55,8 @@ export default {
     switchSeen(state, arr) {//切换日历显示状态
         state.seen = arr.seen
     },
-    switchEditing(state, arr) {//切换编辑问卷状态
-        state.editing.boolean = arr.boolean;
-        state.editing.index = arr.index;
+    switchOperating(state, arr) {//切换编辑问卷状态
+        state.operating.type = arr.type;
+        state.operating.index = arr.index;
     }
 }

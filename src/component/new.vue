@@ -24,7 +24,7 @@ export default {
   },
   mounted:function(){
     this.$store.commit('reset');
-    this.$store.commit('switchEditing',{boolean:false});
+    this.$store.commit('switchOperating',{type:false});
   },
   methods:{
     pullTitle:function(data){//传递问题标题

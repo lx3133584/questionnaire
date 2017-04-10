@@ -6,7 +6,7 @@
     </div>
     <p>截止日期：</p>
     <date></date>
-    <submit :index="indexEditing"></submit>
+    <submit></submit>
   </div>
 </template>
 
@@ -20,15 +20,7 @@ export default {
   computed: {
     title () {
         return this.$store.state.questionnaire.title
-    },
-    indexEditing () {
-        return this.$store.state.editing.index
     }
-  },
-  mounted:function(){
-      if(!this.$store.state.editing.boolean&&this.$route.query.index!=undefined){
-        this.$store.commit('switchEditing',{boolean:true,index:this.$route.query.index});
-      }
   },
   methods:{
     pullTitle:function(data){//传递问题标题
