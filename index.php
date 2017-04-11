@@ -25,6 +25,7 @@ if (!(isset($_SESSION["admin"]) && $_SESSION["admin"] === true)) {
   </head>
   <body>
     <div id="app"></div>
+    <script src="//cdn.bootcss.com/echarts/3.5.0/echarts.simple.min.js"></script>
     <script src="./dist/build.js"></script>
   </body>
 </html>

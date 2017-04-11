@@ -34,8 +34,6 @@
 </template>
 
 <script type="text/javascript">
-import echarts from 'echarts'
-
 export default {
   data() {
     return {
@@ -76,7 +74,8 @@ export default {
           title: this.naire.questions.title,
           tooltip: {},
           legend: {
-              data:['选项']
+              data: ['选项选中次数'],
+              textStyle: {color: '#fff'}
           },
           xAxis: false,
           yAxis: false,
@@ -96,7 +95,8 @@ export default {
           title: this.naire.questions.title,
           tooltip: {},
           legend: {
-              data:['选项']
+              data: ['选项选中次数'],
+              textStyle: {color: '#fff'}
           },
           xAxis: {
               data: this.chart_data[index].bar.x
@@ -106,24 +106,24 @@ export default {
               name: '选项',
               type: 'bar',
               data: this.chart_data[index].bar.y
-          }]
+          }],
+          textStyle: {color: '#fff'}
         }
       };
     },
     switchType: function(index, type) {//切换图表类型
+      this.charts[index] = echarts.init(document.getElementById('echart'+index));
       this.charts[index].setOption(this.option(index, type));
     },
     initEcharts: function() {
       for(let i = 0; i < this.naire.questions.length; i++) {
-        this.charts[i] = echarts.init(document.getElementById('echart'+i));
-        this.switchType(i, 'pie');
+        this.switchType(i, 'bar');
       }
     },
   },
   mounted: function() {
     this.initEcharts()
-  },
-  components: { echarts }
+  }
 }
 </script>
 
