@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from "vue-router"
 // 定义组件
 import Home from '../component/home.vue'
-import Navs from '../component/navs.vue'
 import New from '../component/new.vue'
 import List from '../component/list.vue'
 import View from '../component/view.vue'
@@ -19,10 +18,6 @@ export default new Router({
         {
             path: '/',
             component: Home
-        },
-        {
-            path: '/navs',
-            component: Navs
         },
         {
             path: '/new',

@@ -13,7 +13,7 @@ export default {
     addQuestion(state, arr) {//添加指定类型的问题
         state.questionnaire.questions.push({ type: arr.type, title: '请输入标题', required: false, options: [{ name: '选项', count: 0 }, { name: '选项', count: 0 }] })
     },
-    modQuestionTitle(state, arr) {//修改问卷标题
+    modQuestionTitle(state, arr) {//修改问题标题
         state.questionnaire.questions[arr.index].title = arr.title
     },
     modQuestionRequired(state, arr) {//修改问题是否必填
