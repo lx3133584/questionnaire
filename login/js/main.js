@@ -140,7 +140,15 @@ function bindEvent() {
                 $(".login").hide();
                 $(".success").show();
                 if (data.success) {
-                    $(".success p").text("注册成功");
+                    $(".success p").text("注册成功,3秒后自动跳转");
+                    var flag = 2;
+                    setInterval(function () {
+                        $(".success p").text("注册成功," + flag + "秒后自动跳转");
+                        flag--;
+                        if (flag === -1) {
+                            location.href = "../";
+                        }
+                    }, 1000);
                 }
                 else {
                     $(".success p").text(data.message);
