@@ -54,7 +54,6 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
       output: {
         comments: false,
       },
