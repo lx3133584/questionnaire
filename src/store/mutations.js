@@ -33,7 +33,7 @@ export default {
     },
     copyQuestion(state, arr) {//复用问题
         let cur = state.questionnaire.questions[arr.index];
-        cur = JSON.parse(JSON.stringify(cur));
+        cur = JSON.parse(JSON.stringify(cur));//深拷贝
         state.questionnaire.questions.push(cur);
     },
     removeQuestion(state, arr) {//删除问题

@@ -6,7 +6,7 @@
         <!-- 单选题 -->
         <template v-if="item.type=='radio'">
           <h2>Q{{index+1}} ( 单选题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
           <ul>
             <li v-for="itemIn in item.options">
@@ -20,7 +20,7 @@
         <!-- 多选题 -->
         <template v-if="item.type=='checkbox'">
           <h2>Q{{index+1}} ( 多选题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
           <ul>
             <li v-for="itemIn in item.options">
@@ -34,7 +34,7 @@
         <!-- 文本题 -->
         <template v-if="item.type=='text'">
           <h2>Q{{index+1}} ( 文本题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
           <ul>
             <li>
@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    back: function() {
+    back() {
       this.$store.commit('switchOperating',{type:false});
       this.$router.push('/list');
     },
@@ -69,13 +69,13 @@ export default {
 </script>
 
 <style>
-#view{
+#view {
 	margin: 120px auto 0 auto;
 	width: 95%;
   color: #eee;
 	background: rgba(255,255,255,0.2);
 }
-#view h1{
+#view h1 {
   display: block;
   width: 100%;
   height: 3em;
@@ -83,35 +83,35 @@ export default {
   font-size: 3rem;
   text-align: center;
 }
-#view .main{
+#view .main {
   border-top: 2px solid #ddd;
 }
-#view .main{
+#view .main {
   margin: 1rem 0;
   padding: 5rem;
 
 }
-#view .main h2{
+#view .main h2 {
   font-size: 1.6rem;
 }
-#view .main>li{
+#view .main>li {
   margin-bottom: 3rem;
 }
-#view .main ul>li{
+#view .main ul>li {
   margin: 0.8em 2em;
   font-size: 1.4rem;
 }
-#view .main ul>li label{
+#view .main ul>li label {
   cursor: pointer;
 }
-#view .main ul>li textarea{
+#view .main ul>li textarea {
   width: 60%;
   height: 10rem;
   font-size: 2rem;
   color: #fff;
   background: rgba(255,255,255,0.4);
 }
-#view button{
+#view button {
   float: right;
   display: inline-block;
   margin: 1em;
@@ -126,10 +126,13 @@ export default {
   transition: all 0.5s;
   cursor: pointer;
 }
-#view button:hover{
+#view button:hover {
   color: #000;
   background: #fff;
   border: #000 1px solid;
+}
+#view .required {
+  color:#EB3F3F;
 }
 
 </style>

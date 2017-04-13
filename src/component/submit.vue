@@ -9,14 +9,14 @@
 
 
 export default {
-  data(){
+  data() {
     return {
       type: this.$store.state.operating.type,
       index: this.$store.state.operating.index
     }
   },
   methods:{
-    save:function(index, status, type){
+    save(index, status, type) {
         this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
           this.$store.commit('switchOperating', { type: false });
           this.$store.commit('reset');

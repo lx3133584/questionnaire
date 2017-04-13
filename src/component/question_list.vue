@@ -24,7 +24,7 @@ import Question from './question.vue';
 export default {
   data() {
     return {
-      add_seen:false
+      add_seen: false
     }
   },
   computed: {
@@ -33,11 +33,11 @@ export default {
     }
   },
   methods: {
-    addQuestion: function(type) {//添加指定类型的问题
+    addQuestion(type) {//添加指定类型的问题
       this.$store.commit('addQuestion',{type:type});
       this.add_seen = false;
     },
-    showAdd: function() {//切换 增加的题目类型的显示
+    showAdd() {//切换 增加的题目类型的显示
       this.add_seen = !this.add_seen;
     }
   },

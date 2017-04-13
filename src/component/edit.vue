@@ -23,10 +23,10 @@ export default {
     }
   },
   methods:{
-    pullTitle:function(data){//传递问题标题
+    pullTitle(data) {//传递问题标题
       this.$store.commit('modNaireTitle',{title:data})
     },
-    hideDate:function(){
+    hideDate() {//隐藏日历面板
       if(this.$store.state.seen){
         this.$store.commit('switchSeen',{seen:false})
       }

@@ -4,15 +4,15 @@
     <label><input type="checkbox" v-model="required" @click="modRequired">此题是否必填</label>
     <h2>
       Q{{index+1}}（{{type_name}}）
-      <text_edit :text="title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></text_edit>
+      <text_edit :text="question.title" sClass="qsTitle" iClass="qiTitle" @transferData="pullTitle"></text_edit>
     </h2>
     <ul>
-      <li v-if="type==='text'">
+      <li v-if="question.type==='text'">
         <i class="iconfont icon-text"></i>
       </li>
-      <li v-else v-for="(item,index) in options">
-        <i :class="icon+type"></i>
-        <text_edit :text="options[index].name" @transferData="pullData" @transferIndex="pullIndex(index)"></text_edit>
+      <li v-else v-for="(item,index) in question.options">
+        <i :class="'iconfont icon-' + question.type"></i>
+        <text_edit :text="question.options[index].name" @transferData="pullData" @transferIndex="pullIndex(index)"></text_edit>
         <i class="iconfont icon-close" @click="removeOption(index)"></i>
       </li>
     </ul>
@@ -22,7 +22,7 @@
       <span @click="copyQuestion">复用</span>
       <span @click="removeQuestion">删除</span>
     </p>
-    <button v-if="(type==='text')" id="station"></button>
+    <button v-if="(question.type==='text')" id="station"></button>
     <button v-else @click="addOption">+ 添加选项</button>
   </div>
 </template>
@@ -33,25 +33,24 @@ import Text_edit from './text_edit.vue';
 export default {
   data () {
     return {
-      icon:'iconfont icon-',
-      tem_option:'临时选项'
+      temp_option: '临时选项'
     }
   },
   props: {
       index: Number,
   },
   computed: {
-    title() {
-      return this.$store.state.questionnaire.questions[this.index].title
+    question() {
+      return this.$store.state.questionnaire.questions[this.index]
+    },
+    required() {
+      return this.question.required
     },
     length() {
       return this.$store.state.questionnaire.questions.length
     },
-    type() {
-      return this.$store.state.questionnaire.questions[this.index].type
-    },
     type_name() {
-      switch (this.type){
+      switch (this.question.type){
         case "radio":
           return "单选题";
           break;
@@ -62,43 +61,37 @@ export default {
           return "文本题";
           break;
       };
-    },
-    required() {
-      return this.$store.state.questionnaire.questions[this.index].required
-    },
-    options() {
-      return this.$store.state.questionnaire.questions[this.index].options
     }
   },
   methods:{
-    pullTitle:function(data){//传递问题标题
+    pullTitle(data) {//传递问题标题
       this.$store.commit('modQuestionTitle',{index:this.index,title:data})
     },
-    pullData:function(data){//传递选项的值
-      this.tem_option = data
+    pullData(data) {//传递选项的值
+      this.temp_option = data
     },
-    pullIndex:function(index){//把选项的值插入到数组
-      this.$store.commit('modOption',{index:this.index,oindex:index,option:this.tem_option})
+    pullIndex(index) {//把选项的值插入到数组
+      this.$store.commit('modOption',{index:this.index,oindex:index,option:this.temp_option})
     },
-    addOption:function(){//添加选项
+    addOption() {//添加选项
       this.$store.commit('addOption',{index:this.index,option:"选项"})
     },
-    removeOption:function(index){//删除选项
+    removeOption(index) {//删除选项
       this.$store.commit('removeOption',{index:this.index,oindex:index})
     },
-    upQuestion:function(){//上移问题
+    upQuestion() {//上移问题
       this.$store.commit('upQuestion',{index:this.index})
     },
-    downQuestion:function(){//下移问题
+    downQuestion() {//下移问题
       this.$store.commit('downQuestion',{index:this.index})
     },
-    copyQuestion:function(){//复用问题
+    copyQuestion() {//复用问题
       this.$store.commit('copyQuestion',{index:this.index})
     },
-    removeQuestion:function(){//删除问题
+    removeQuestion() {//删除问题
       this.$store.commit('removeQuestion',{index:this.index})
     },
-    modRequired:function(){//修改问题是否必填
+    modRequired() {//修改问题是否必填
       this.$store.commit('modQuestionRequired',{index:this.index,required:!this.required})
     }
   },

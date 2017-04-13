@@ -8,21 +8,21 @@
 
 <script type="text/javascript">
 export default {
-  data () {
+  data() {
     return {
       hello: "你好",
-      msg:"欢迎来到问卷管理系统！"
+      msg: "欢迎来到问卷管理系统！"
   	}
   },
   computed: {
-    length () {
+    length() {
     	return this.$store.state.list.length;
   	},
-  	name () {
+  	name() {
   		return this.$store.state.name;
   	}
   },
-  mounted () {
+  mounted() {
 		this.$store.dispatch('getList');
 		this.$store.dispatch('getName');
   }

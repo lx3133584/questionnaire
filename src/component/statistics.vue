@@ -6,25 +6,25 @@
         <!-- 单选题-->
         <template v-if="item.type=='radio'">
           <h2>Q{{index+1}} ( 单选题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
           <button @click="switchType(index, 'pie')">饼状图</button>
           <button @click="switchType(index, 'bar')">柱状图</button>
-          <div :id="'echart'+index"></div>
+          <div :id="`echart${index}`"></div>
         </template>
         <!-- 多选题 -->
         <template v-if="item.type=='checkbox'">
           <h2>Q{{index+1}} ( 多选题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
           <button @click="switchType(index, 'pie')">饼状图</button>
           <button @click="switchType(index, 'bar')">柱状图</button>
-          <div :id="'echart'+index"></div>
+          <div :id="`echart${index}`"></div>
         </template>
         <!-- 文本题 -->
         <template v-if="item.type=='text'">
           <h2>Q{{index+1}} ( 文本题 ) {{item.title}}
-            <span v-if="item.required" style="color:#EB3F3F">*</span>
+            <span v-if="item.required" class="required">*</span>
           </h2>
         </template> 
       </li>
@@ -49,9 +49,9 @@ export default {
     },
     chart_data() {//图表使用的数据
       let data = [];
-      for(let i = 0; i < this.naire.questions.length; i++) {
+      for(let i of this.naire.questions.keys()) {
         data[i] = {pie:[],bar:{x:[],y:[]}};
-        for(let j = 0; j < this.naire.questions[i].options.length; j++) {
+        for(let j of this.naire.questions[i].options.keys()) {
           data[i].pie[j] = {
             name: this.naire.questions[i].options[j].name,
             value: this.naire.questions[i].options[j].count
@@ -64,11 +64,11 @@ export default {
     }
   },
   methods: {
-    back: function() {//返回列表页
+    back() {//返回列表页
       this.$store.commit('switchOperating',{type:false});
       this.$router.push('/list');
     },
-    option: function(index, type) {//echarts的设置
+    option(index, type) {//echarts的设置
       if(type === 'pie') {
         return {
           title: this.naire.questions.title,
@@ -111,30 +111,30 @@ export default {
         }
       };
     },
-    switchType: function(index, type) {//切换图表类型
-      this.charts[index] = echarts.init(document.getElementById('echart'+index));
+    switchType(index, type) {//切换图表类型
+      this.charts[index] = echarts.init(document.getElementById(`echart${index}`));
       this.charts[index].setOption(this.option(index, type));
     },
-    initEcharts: function() {
-      for(let i = 0; i < this.naire.questions.length; i++) {
+    initEcharts() {
+      for(let i of this.naire.questions.keys()) {
         this.switchType(i, 'bar');
       }
     },
   },
-  mounted: function() {
+  mounted() {
     this.initEcharts()
   }
 }
 </script>
 
 <style>
-#statistics{
+#statistics {
 	margin: 120px auto 0 auto;
 	width: 95%;
   color: #eee;
 	background: rgba(255,255,255,0.2);
 }
-#statistics h1{
+#statistics h1 {
   display: block;
   width: 100%;
   height: 3em;
@@ -142,24 +142,24 @@ export default {
   font-size: 3rem;
   text-align: center;
 }
-#statistics .main{
+#statistics .main {
   border-top: 2px solid #ddd;
 }
-#statistics .main{
+#statistics .main {
   margin: 1rem 0;
   padding: 5rem;
 
 }
-#statistics .main h2{
+#statistics .main h2 {
   font-size: 1.6rem;
 }
-#statistics .main div{
+#statistics .main div {
   margin: 20px;
   width: 60%;
   height: 20rem;
   font-size: 2rem;
 }
-#statistics button{
+#statistics button {
   float: right;
   display: inline-block;
   margin: 1em;
@@ -174,10 +174,13 @@ export default {
   transition: all 0.5s;
   cursor: pointer;
 }
-#statistics button:hover{
+#statistics button:hover {
   color: #000;
   background: #fff;
   border: #000 1px solid;
+}
+#statistics .required {
+  color:#EB3F3F;
 }
 
 </style>

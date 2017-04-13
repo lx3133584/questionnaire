@@ -32,27 +32,27 @@
 <script type="text/javascript">
 export default {
   computed: {
-    list () {
+    list() {
     	return this.$store.state.list
     }
   },
-  mounted:function(){
+  mounted() {
     this.$store.dispatch('getList');
   },
   methods:{
-  	edit:function(index){
+  	edit(index) {//编辑
   		this.$store.commit('reset',{index:index})
 			this.$store.commit('switchOperating',{type:'editing',index:index});
 			this.$router.push({ path: 'edit'});
   	},
-    del:function(index){
+    del(index) {//删除
       this.$store.dispatch('removeNaire',{index:index});
     },
-    view:function(index){
+    view(index) {//查看问卷
 			this.$store.commit('switchOperating',{type:'viewing',index:index});
       this.$router.push({ path: 'view'})
     },
-		statistics:function(index){
+		statistics(index) {//问卷统计
 			this.$store.commit('switchOperating',{type:'statistics',index:index});
 			this.$router.push({ path: 'statistics'})
 		}

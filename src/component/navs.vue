@@ -31,7 +31,7 @@ export default {
     }
   },
 	computed: {
-    operating_type () {
+    operating_type () {//正在操作的类型
       return this.$store.state.operating.type
     }
   }
