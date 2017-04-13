@@ -29,7 +29,7 @@ html,body {
   background-size: cover;
   background-attachment: fixed;
 }
-#app{
+#app {
   margin-top: 100px;
   height: 100%
 }
@@ -37,19 +37,21 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-a{
+a {
   color: inherit;
   text-decoration: none;
+}
+a, span {
   -moz-user-select: none; /*火狐*/
   -webkit-user-select: none; /*webkit浏览器*/
   -ms-user-select: none; /*IE10*/
   -khtml-user-select: none; /*早期浏览器*/
   user-select: none;
 }
-a:hover{
+a:hover {
   color: #ff9800;
 }
-input,textarea,button{
+input,textarea,button {
   outline: rgba(255,152,0,0.8);
 }
 </style>

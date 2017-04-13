@@ -20,28 +20,27 @@ export default {
         state.questionnaire.questions[arr.index].required = arr.required
     },
     upQuestion(state, arr) {//上移问题
-        var cur = state.questionnaire.questions[arr.index];
-        var pre = state.questionnaire.questions[arr.index - 1];
-        state.questionnaire.questions.splice(arr.index - 1, 1, cur);
+        let pre = state.questionnaire.questions[arr.index - 1];
+        state.questionnaire.questions.copyWithin(arr.index - 1, arr.index, arr.index + 1)
         state.questionnaire.questions.splice(arr.index, 1, pre);
 
     },
     downQuestion(state, arr) {//下移问题
-        var cur = state.questionnaire.questions[arr.index];
-        var aft = state.questionnaire.questions[arr.index + 1];
-        state.questionnaire.questions.splice(arr.index + 1, 1, cur);
+        let aft = state.questionnaire.questions[arr.index + 1];
+        state.questionnaire.questions.copyWithin(arr.index + 1, arr.index, arr.index + 1)
         state.questionnaire.questions.splice(arr.index, 1, aft);
 
     },
     copyQuestion(state, arr) {//复用问题
-        var cur = state.questionnaire.questions[arr.index];
+        let cur = state.questionnaire.questions[arr.index];
+        cur = JSON.parse(JSON.stringify(cur));
         state.questionnaire.questions.push(cur);
     },
     removeQuestion(state, arr) {//删除问题
         state.questionnaire.questions.splice(arr.index, 1);
     },
     addOption(state, arr) {//添加选项
-        state.questionnaire.questions[arr.index].options.push({name:arr.option,count:0})
+        state.questionnaire.questions[arr.index].options.push({ name: arr.option, count: 0 })
     },
     removeOption(state, arr) {//删除选项
         state.questionnaire.questions[arr.index].options.splice(arr.oindex, 1)

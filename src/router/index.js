@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from "vue-router"
-// 定义组件
+
+
 import Home from '../component/home.vue'
 import New from '../component/new.vue'
 import List from '../component/list.vue'
@@ -10,8 +11,7 @@ import Statistics from '../component/statistics.vue'
 
 Vue.use(Router)
 
-// 创建一个路由器实例
-// 并且配置路由规则
+
 export default new Router({
     base: __dirname,
     routes: [

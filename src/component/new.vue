@@ -22,15 +22,15 @@ export default {
       return this.$store.state.questionnaire.title
     }
   },
-  mounted: function() {
+  mounted() {
     this.$store.commit('reset');
     this.$store.commit('switchOperating',{type:false});
   },
   methods: {
-    pullTitle:function(data) {//传递问题标题
+    pullTitle(data) {//传递问题标题
       this.$store.commit('modNaireTitle',{title:data})
     },
-    hideDate: function() {
+    hideDate() {    //隐藏日期
       if(this.$store.state.seen) {
         this.$store.commit('switchSeen',{seen:false})
       }
