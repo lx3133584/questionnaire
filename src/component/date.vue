@@ -29,6 +29,8 @@
     </div>
 </template>
 <script>
+import messageBox from './messageBox/main.js'
+
 export default{
     data () {
         return {
@@ -126,15 +128,22 @@ export default{
             if(this.year*10000+this.month*100+this.day>=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate()){
                 this.$store.commit("modDate",{date:this.year +"-"+ this.month+ "-" + this.day});
             }else{
-                alert("请输入正确的截止日期")
-                return false;
+                messageBox({
+                    title: '提示',
+                    message: '请输入正确的截止日期。',
+                    type: 'alert',
+                    success: ()=>{
+                        return false;
+                    }
+                }); 
             }
             this.$store.commit("switchSeen",{seen:false});
         },
         close() {
             this.$store.commit("switchSeen",{seen:false});
         }
-    }
+    },
+    components: { messageBox }
 }
 function getToDay() {
     let now = new Date();

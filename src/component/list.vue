@@ -30,6 +30,8 @@
 </template>
 
 <script type="text/javascript">
+import messageBox from './messageBox/main.js'
+
 export default {
   computed: {
     list() {
@@ -46,7 +48,14 @@ export default {
 			this.$router.push({ path: 'edit'});
   	},
     del(index) {//删除
-      this.$store.dispatch('removeNaire',{index:index});
+			messageBox({
+				title: '删除',
+				message: '该问卷将永久删除不能恢复, 是否确定?',
+				type: 'confirm',
+				success: ()=>{
+				this.$store.dispatch('removeNaire',{index:index});
+				}
+			}); 
     },
     view(index) {//查看问卷
 			this.$store.commit('switchOperating',{type:'viewing',index:index});
@@ -56,7 +65,8 @@ export default {
 			this.$store.commit('switchOperating',{type:'statistics',index:index});
 			this.$router.push({ path: 'statistics'})
 		}
-  }
+  },
+	components: { messageBox }
 }
 </script>
 

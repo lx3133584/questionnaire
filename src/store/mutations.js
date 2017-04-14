@@ -4,7 +4,7 @@ export default {
             state.questionnaire = state.list[arr.index];
         }
         else {
-            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: [{ name: '选项', count: 0 }, { name: '选项', count: 0 }] }], date: '2017-1-1', status: '未保存' }
+            state.questionnaire = { title: '请输入标题', questions: [{ type: 'radio', title: '请输入标题', required: false, options: [{ name: '选项', count: 0 }, { name: '选项', count: 0 }] }], date: '2018-1-1', status: '未保存' }
         }
     },
     modNaireTitle(state, arr) {//修改问卷标题

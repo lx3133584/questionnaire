@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/javascript">
-
+import messageBox from './messageBox/main.js'
 
 export default {
   data() {
@@ -17,13 +17,29 @@ export default {
   },
   methods:{
     save(index, status, type) {
-        this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
-          this.$store.commit('switchOperating', { type: false });
-          this.$store.commit('reset');
-          this.$router.push('/list');
+      if(status === '已发布') {
+        messageBox({
+          title: '保存/提交',
+          message: '提交问卷后，截止日期之前不可更改, 是否确定?',
+          type: 'confirm',
+          success: ()=>{
+            this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
+              this.$store.commit('switchOperating', { type: false });
+              this.$store.commit('reset');
+              this.$router.push('/list');
+            })
+          }, 
         })
-    }
-  }
+      }
+      else {
+        this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
+              this.$store.commit('switchOperating', { type: false });
+              this.$store.commit('reset');
+              this.$router.push('/list');
+      })
+    }}
+  },
+  components: { messageBox }
 }
 </script>
 
