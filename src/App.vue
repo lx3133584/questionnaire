@@ -41,7 +41,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-a, span {
+a, span, button {
   -moz-user-select: none; /*火狐*/
   -webkit-user-select: none; /*webkit浏览器*/
   -ms-user-select: none; /*IE10*/

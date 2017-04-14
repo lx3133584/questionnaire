@@ -1,5 +1,6 @@
 <template>
-    <transition name="fade">
+<div>
+   <transition name="fade">
         <div id="messageBox" v-show="show">
             <div>
               <div class="title">
@@ -23,9 +24,12 @@
                   </button>
                 </div>
             </div>
-            <div class="fixed" v-show="show" @click="handleAction('cancel')"></div>
+            
         </div>
     </transition>
+    <div class="fixed" v-show="show" @click="handleAction('cancel')"></div>
+</div>
+ 
 </template>
 
 <script type="text/babel">
@@ -136,7 +140,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10;
+    z-index: 9;
     background: #000;
     opacity: 0.2;
 }
