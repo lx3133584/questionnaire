@@ -6,14 +6,18 @@ const MessageBoxConstructor = Vue.extend(msgboxVue);
 let instance;
 
 const initInstance = () => {
-  instance = new MessageBoxConstructor({
-      el: document.createElement('div')
-  });
+    instance = new MessageBoxConstructor({
+        el: document.createElement('div')
+    });
 };
 
-const MessageBox = function(options) {
-    initInstance();
-    
+const MessageBox = function (options) {
+    if (!instance) {
+        initInstance();
+    }
+
+    instance.show = true;
+
     for (let prop in options) {
         if (options.hasOwnProperty(prop)) {
             instance[prop] = options[prop];

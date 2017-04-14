@@ -1,29 +1,31 @@
 <template>
-    <div id="messageBox" v-if="show">
-        <div>
-          <div class="title">
-              <h1>{{ title }}</h1>
-              <i class="iconfont icon-close" @click="handleAction('cancel')"></i>
+    <transition name="fade">
+        <div id="messageBox" v-show="show">
+            <div>
+              <div class="title">
+                  <h1>{{ title }}</h1>
+                  <i class="iconfont icon-close" @click="handleAction('cancel')"></i>
+                </div>
+                <div class="main">
+                  <p>{{ message }}</p>
+                </div>
+                <div class="btns">
+                  <button
+                    class="cancel"
+                    v-if="type === 'confirm'"
+                    @click="handleAction('cancel')">
+                    取消
+                  </button>
+                  <button
+                    class="submit"
+                    @click="handleAction('submit')">
+                    确定
+                  </button>
+                </div>
             </div>
-            <div class="main">
-              <p>{{ message }}</p>
-            </div>
-            <div class="btns">
-              <button
-                class="cancel"
-                v-if="type === 'confirm'"
-                @click="handleAction('cancel')">
-                取消
-              </button>
-              <button
-                class="submit"
-                @click="handleAction('submit')">
-                确定
-              </button>
-            </div>
+            <div class="fixed" v-show="show" @click="handleAction('cancel')"></div>
         </div>
-        <div class="fixed" v-if="show" @click="handleAction('cancel')"></div>
-    </div>
+    </transition>
 </template>
 
 <script type="text/babel">
@@ -70,7 +72,7 @@
     right: 0;
     margin: auto;
     width: 30%;
-    height: 32%;
+    height: 26%;
     background: #fff;
     border-radius: 8px;
     z-index: 9999;
@@ -85,11 +87,11 @@
 }
 #messageBox .title h1 {
     display: inline-block;
-    font-size: 26px;
+    font-size: 20px;
 }
 #messageBox .title i {
     float: right;
-    font-size: 30px;
+    font-size: 24px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -98,17 +100,16 @@
 }
 #messageBox .main p {
     margin: 12%;
-    font-size: 20px;
+    font-size: 16px;
 }
 #messageBox .btns button {
     float: right;
     display: inline-block;
-    margin-top: 5px;
-    margin-right: 18px;
+    margin: 5px 18px;
     width: 4em;
     height: 1.5em;
     line-height: 1.5em;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     border: none;
     transition: all 0.3s;
@@ -136,6 +137,14 @@
     width: 100%;
     height: 100%;
     z-index: -10;
-    background: rgba(0,0,0,0.3)
+    background: #000;
+    opacity: 0.2;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s;
+}
+.fade-enter, .fade-leave-active {
+    transform: translateY(-10px);
+    opacity: 0;
 }
 </style>

@@ -7,6 +7,8 @@
 </template>
 
 <script type="text/javascript">
+import messageBox from './messageBox/main.js'
+
 export default {
   data() {
     return {
@@ -25,7 +27,9 @@ export default {
   mounted() {
 		this.$store.dispatch('getList');
 		this.$store.dispatch('getName');
-  }
+		messageBox({show:false});
+  },
+	components: { messageBox }
 }
 </script>
 
