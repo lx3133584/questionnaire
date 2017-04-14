@@ -115,7 +115,7 @@ export default {
       this.charts[index] = echarts.init(document.getElementById(`echart${index}`));
       this.charts[index].setOption(this.option(index, type));
       let btn = document.getElementById(`${type}Btn${index}`);
-      let otherBtn = btn.parentNode.getElementsByTagName('button');
+      let otherBtn = Array.from(btn.parentNode.getElementsByTagName('button'));
       for(let v of otherBtn) {
         if(v.className.includes("active")) {
           v.className = v.className.replace(" active","");
