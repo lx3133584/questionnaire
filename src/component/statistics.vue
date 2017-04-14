@@ -8,8 +8,8 @@
           <h2>Q{{index+1}} ( 单选题 ) {{item.title}}
             <span v-if="item.required" class="required">*</span>
           </h2>
-          <button @click="switchType(index, 'pie')">饼状图</button>
-          <button @click="switchType(index, 'bar')">柱状图</button>
+          <button :id="`pieBtn${index}`" class="btn-right" @click="switchType(index, 'pie')">饼状图</button>
+          <button :id="`barBtn${index}`" class="btn-left" @click="switchType(index, 'bar')">柱状图</button>
           <div :id="`echart${index}`"></div>
         </template>
         <!-- 多选题 -->
@@ -17,8 +17,8 @@
           <h2>Q{{index+1}} ( 多选题 ) {{item.title}}
             <span v-if="item.required" class="required">*</span>
           </h2>
-          <button @click="switchType(index, 'pie')">饼状图</button>
-          <button @click="switchType(index, 'bar')">柱状图</button>
+          <button :id="`pieBtn${index}`" class="btn-right" @click="switchType(index, 'pie')">饼状图</button>
+          <button :id="`barBtn${index}`" class="btn-left" @click="switchType(index, 'bar')">柱状图</button>
           <div :id="`echart${index}`"></div>
         </template>
         <!-- 文本题 -->
@@ -114,6 +114,17 @@ export default {
     switchType(index, type) {//切换图表类型
       this.charts[index] = echarts.init(document.getElementById(`echart${index}`));
       this.charts[index].setOption(this.option(index, type));
+      let btn = document.getElementById(`${type}Btn${index}`);
+      let otherBtn = btn.parentNode.getElementsByTagName('button');
+      for(let v of otherBtn) {
+        if(v.className.includes("active")) {
+          v.className = v.className.replace(" active","");
+        }
+      }
+      if(!btn.className.includes("active")) {
+        btn.className += " active";
+      }
+
     },
     initEcharts() {
       for(let i of this.naire.questions.keys()) {
@@ -159,7 +170,32 @@ export default {
   height: 20rem;
   font-size: 2rem;
 }
-#statistics button {
+#statistics .main button {
+  float: right;
+  display: inline-block;
+  width: 4.5em;
+  height: 1.8em;
+  line-height: 1.8em;
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  border: none;
+  background: rgba(255,152,0,0.8);
+  box-shadow: 4px 4px 4px #faab36 inset;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+#statistics .main button.btn-left {
+  border-right: 2px solid #fff;
+  border-radius: 8px 0px 0px 8px;
+}
+#statistics .main button.btn-right {
+  border-radius: 0px 8px 8px 0px;
+}
+#statistics .main button.active {
+  box-shadow: 6px 6px 6px #a76401 inset;
+}
+#statistics>button {
   float: right;
   display: inline-block;
   margin: 1em;
@@ -174,13 +210,13 @@ export default {
   transition: all 0.5s;
   cursor: pointer;
 }
-#statistics button:hover {
+#statistics>button:hover {
   color: #000;
   background: #fff;
   border: #000 1px solid;
 }
 #statistics .required {
-  color:#EB3F3F;
+  color: #EB3F3F;
 }
 
 </style>
