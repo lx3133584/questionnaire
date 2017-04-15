@@ -7,6 +7,7 @@
 
 <script type="text/javascript">
 import messageBox from './messageBox/main.js'
+import loading from './loading/main.js'
 
 export default {
   data() {
@@ -23,7 +24,9 @@ export default {
           message: '提交问卷后，截止日期之前不可更改, 是否确定?',
           type: 'confirm',
           success: ()=>{
+            loading({show: true});
             this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
+              loading({show: false});
               this.$store.commit('switchOperating', { type: false });
               this.$store.commit('reset');
               this.$router.push('/list');
@@ -32,14 +35,16 @@ export default {
         })
       }
       else {
+        loading({show: true});
         this.$store.dispatch('save',{index: index, status:status, type: type}).then(()=>{
+              loading({show: false});
               this.$store.commit('switchOperating', { type: false });
               this.$store.commit('reset');
               this.$router.push('/list');
       })
     }}
   },
-  components: { messageBox }
+  components: { messageBox, loading }
 }
 </script>
 

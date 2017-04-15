@@ -1,6 +1,6 @@
 <template>
 <div>
-   <transition name="fade">
+   <transition name="push">
         <div id="messageBox" v-show="show">
             <div>
               <div class="title">
@@ -144,10 +144,10 @@
     background: #000;
     opacity: 0.2;
 }
-.fade-enter-active, .fade-leave-active {
+.push-enter-active, .push-leave-active {
     transition: all .3s;
 }
-.fade-enter, .fade-leave-active {
+.push-enter, .push-leave-active {
     transform: translateY(-10px);
     opacity: 0;
 }
