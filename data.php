@@ -45,7 +45,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 //获得用户名
 function getName(){
 	session_start();
-	echo $_SESSION["account"];
+	$account = $_SESSION["account"];
+
+	mysql_query("SET NAMES utf8");
+
+	$sql = "SELECT name FROM  MyGuests WHERE account='$account' ";
+	$query = mysql_query($sql);
+	$row = mysql_fetch_array($query);
+	if($row[0]!="") {
+		$data = $row[0];
+	}
+	else {
+		$data = $account;
+	}
+
+
+	echo $data;
 }
 //增加问卷
 function addData(){
@@ -61,7 +76,7 @@ function addData(){
 	$sql1 = "SELECT data FROM  MyGuests WHERE account='$name' ";
 	$query1 = mysql_query($sql1);
 	$row = mysql_fetch_array($query1);
-	if($row[0]!=""){
+	if($row[0]!="") {
 		$data = $row[0].'++'.$data;
 	}
 	
