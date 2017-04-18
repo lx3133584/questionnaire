@@ -1,11 +1,11 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: './dist/',
         filename: 'build.js'
     },
     module: {
@@ -15,8 +15,10 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        'scss': 'vue-style-loader!css-loader!sass-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+                        css: ExtractTextPlugin.extract({
+                            use: 'css-loader',
+                            fallback: 'vue-style-loader'
+                        })
                     }
                 }
             },
@@ -26,10 +28,17 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jpg|gif)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]?[hash]'
+                    name: 'images/[name].[ext]'
+                }
+            },
+            {
+                test: /\.(ttf|woff|eot|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'font/[name].[ext]'
                 }
             }
         ]
@@ -63,6 +72,7 @@ module.exports = {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
-        })
+        }),
+        new ExtractTextPlugin("style.css")
     ]
 }

@@ -34,11 +34,6 @@
 
 <script type="text/babel">
     export default {
-        props: {
-            modal: {
-                default: true
-            }
-        },
         methods: {
             handleAction(action) {
                 if (this.type === 'alert' || action === 'cancel') {

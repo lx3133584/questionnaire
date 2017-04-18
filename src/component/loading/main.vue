@@ -1,7 +1,6 @@
 <template>
     <div>
         <div id="loading" v-show="show">
-            <img src="../../assets/images/loading.gif">
             <span>{{message}}</span>
         </div>
         <div class="fixed" v-show="show" @click="handleAction('cancel')"></div>
@@ -44,5 +43,13 @@
         border-radius: 8px;
         text-align: center;
         z-index: 9999;
+    }
+    #loading span:before {
+        content: " ";
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        background: url("../../assets/images/loading.gif") no-repeat;
     }
 </style>

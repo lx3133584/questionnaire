@@ -15,6 +15,8 @@
 </script>
 
 <style>
+    @import 'assets/font/iconfont.css';
+
     * {
         margin: 0;
     }

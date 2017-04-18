@@ -9,6 +9,13 @@ import View from '../component/view.vue'
 import Edit from '../component/edit.vue'
 import Statistics from '../component/statistics.vue'
 
+// const Home = resolve => require(['../component/home.vue'], resolve)
+// const New = resolve => require(['../component/new.vue'], resolve)
+// const List = resolve => require(['../component/list.vue'], resolve)
+// const View = resolve => require(['../component/view.vue'], resolve)
+// const Edit = resolve => require(['../component/edit.vue'], resolve)
+// const Statistics = resolve => require(['../component/statistics.vue'], resolve)
+
 Vue.use(Router)
 
 
