@@ -2,19 +2,20 @@ import Vue from 'vue'
 import Router from "vue-router"
 
 
-import Home from '../component/home.vue'
-import New from '../component/new.vue'
-import List from '../component/list.vue'
-import View from '../component/view.vue'
-import Edit from '../component/edit.vue'
-import Statistics from '../component/statistics.vue'
+// import Home from '../component/home.vue'
+// import New from '../component/new.vue'
+// import List from '../component/list.vue'
+// import View from '../component/view.vue'
+// import Edit from '../component/edit.vue'
+// import Statistics from '../component/statistics.vue'
 
-// const Home = resolve => require(['../component/home.vue'], resolve)
-// const New = resolve => require(['../component/new.vue'], resolve)
-// const List = resolve => require(['../component/list.vue'], resolve)
-// const View = resolve => require(['../component/view.vue'], resolve)
-// const Edit = resolve => require(['../component/edit.vue'], resolve)
-// const Statistics = resolve => require(['../component/statistics.vue'], resolve)
+const Home = r => require.ensure([], () => r(require('../component/home.vue')), 'home')
+const New = r => require.ensure([], () => r(require('../component/new.vue')), 'new')
+const List = r => require.ensure([], () => r(require('../component/list.vue')), 'list')
+const View = r => require.ensure([], () => r(require('../component/view.vue')), 'view')
+const Edit = r => require.ensure([], () => r(require('../component/edit.vue')), 'edit')
+const Statistics = r => require.ensure([], () => r(require('../component/statistics.vue')), 'statistics')
+
 
 Vue.use(Router)
 

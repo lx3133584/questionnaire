@@ -3,10 +3,13 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-    entry: './src/main.js',
+    entry: {
+        main: './src/main.js'
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'build.js'
+        filename: 'main.js',
+        chunkFilename: "../../que/dist/router/[name].js"
     },
     module: {
         rules: [
@@ -73,6 +76,9 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin({
+            filename: 'style.css',
+            allChunks: true,
+        })
     ]
 }
