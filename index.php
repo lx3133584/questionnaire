@@ -15,16 +15,4 @@ if (!(isset($_SESSION["admin"]) && $_SESSION["admin"] === true)) {
   exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>问卷调查后台管理系统</title>
-    <link rel="stylesheet" href="./dist/style.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="//cdn.bootcss.com/echarts/3.5.0/echarts.simple.min.js"></script>
-    <script src="./dist/main.js"></script>
-  </body>
-</html>
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><title>问卷调查后台管理系统</title><link href=/que/static/css/app.a91a6aec00ae90c4e99909998309f85d.css rel=stylesheet></head><body><div id=app></div><script src=//cdn.bootcss.com/echarts/3.5.0/echarts.simple.min.js></script><script type=text/javascript src=/que/static/js/manifest.04372965fcbebdd40bf9.js></script><script type=text/javascript src=/que/static/js/vendor.81a4e2d18cb43bc112f9.js></script><script type=text/javascript src=/que/static/js/app.a32a0f2530229938ada9.js></script></body></html>
