@@ -5,15 +5,12 @@ Vue.use(VueResource)
 
 function overdue(date) {//判断问卷是否过期的方法
     let queDate = date.split('-');
-    for (let [i, v] of queDate.entries()) {
-        queDate[i] = Number(v);
-    }
     let nowDate = new Date();
     let year = nowDate.getFullYear();
     let month = nowDate.getMonth() + 1;
     let day = nowDate.getDate();
     let now = year * 10000 + month * 100 + day;
-    let que = queDate[0] * 10000 + queDate[1] * 100 + queDate[2];
+    let que = queDate[0] * 10000 + queDate[1] * 100 + +queDate[2];
     return que < now;
 }
 
